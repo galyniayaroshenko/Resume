@@ -1,0 +1,14 @@
+<button
+  class="btn btn-default btn-edit {{visible ? class : ''}}"
+  (click)="editSelf()"
+>
+  <!--class="btn btn-default btn-edit {{visible ? class : ''}}"-->
+
+  <i
+    class="glyphicon {{class}}"
+    [ngClass]="{
+      'glyphicon-pencil': visible,
+      'glyphicon-ok': !visible
+    }"
+  ></i>
+</button>

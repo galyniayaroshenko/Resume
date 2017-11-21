@@ -1,0 +1,23 @@
+<div *ngIf="!skillsEditSelfState">
+    <div class="item" *ngFor="let skill of skills; let i = index">
+        <span class="project-title"><a href="">{{skill.name}}</a></span> -
+        <span class="project-tagline" *ngFor="let tool of skill.tools; let i = index">
+            {{tool.name}},
+        </span>
+    </div>
+</div>
+<div *ngIf="skillsEditSelfState" [formGroup]="parentForm">
+    <div formArrayName="skills">
+        <cv-skill
+            *ngFor="let skill of skills; let i = index"
+            [formArray]="parentForm.controls.skills"
+            [skill]="skill"
+            (removed)="removeSkill(i)"
+        ></cv-skill>
+    </div>
+    <div class="margin-20">
+        <button class="btn btn-default" (click)="addSkill()">
+            Add another skill +
+        </button>
+    </div>
+</div>

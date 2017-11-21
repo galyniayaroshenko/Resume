@@ -1,0 +1,31 @@
+<div *ngIf="!projectsEditSelfState">
+    <div class="item" *ngFor="let project of projects; let i=index">
+        <div class="meta">
+            <div class="upper-row">
+                <h3 class="job-title">{{project.title}}</h3>
+                <h6 class="job-title">{{project.position}}</h6>
+                <div class="time">{{project.startDate}} - {{project.endDate}}</div>
+            </div>
+        </div>
+        <div class="details"><p>{{project.descriptions}}</p></div>
+        <div>Website - {{project.website || 'None'}}</div>
+        <span>Tools:</span>
+        <span *ngFor="let tool of project.tools; let i = index">
+            {{tool.name || 'None'}},
+        </span>
+        <div>Type - {{project.type || 'None'}}</div>
+    </div>
+</div>
+<div *ngIf="projectsEditSelfState" [formGroup]="parentForm">
+    <div formArrayName="projects">
+        <cv-project
+            *ngFor="let project of projects; let i = index"
+            [formArray]="parentForm.controls.projects"
+            [project]="project"
+            (removed)="removeProject(i)"
+        ></cv-project>
+    </div>
+    <button (click)="addProject()" class="btn btn-default">
+        Add another projects +
+    </button>
+</div>

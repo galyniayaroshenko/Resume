@@ -1,0 +1,264 @@
+<div class="wrapper">
+    <form [formGroup]="form" class="form">
+        <div class="sidebar-wrapper">
+            <div class="profile-container">
+                <img class="profile" src="../../../../../assets/images/profile.jpg" alt="" />
+                <!--<label class="btn btn-default btn-file">Browse <input type="file" style="display: none;"></label>-->
+                <div class="form-group">
+                    <h1 class="name" *ngIf="!nameEditSelfState">{{form.value.name}}</h1>
+                    <input
+                        *ngIf="nameEditSelfState"
+                        type="text"
+                        formControlName="name"
+                        class="form-control custom-control large"
+                        pTooltip="Enter name"
+                        tooltipPosition="top"
+                    />
+                    <cv-edit-button
+                        *ngIf="resumeDetail.state === StatesEnum.Edit"
+                        (click)="nameEditSelfState = !nameEditSelfState"
+                        class="large marginBottom"
+                    ></cv-edit-button>
+                </div>
+                <div class="form-group">
+                    <h3 class="tagline" *ngIf="!positionEditSelfState">{{form.value.position}}</h3>
+                    <input
+                        *ngIf="positionEditSelfState"
+                        type="text"
+                        formControlName="position"
+                        class="form-control custom-control medium"
+                        pTooltip="Enter position"
+                        tooltipPosition="top"
+                    >
+                    <cv-edit-button
+                        *ngIf="resumeDetail.state === StatesEnum.Edit"
+                        (click)="positionEditSelfState = !positionEditSelfState"
+                        class="medium"
+                    ></cv-edit-button>
+                </div>
+            </div><!--//profile-container-->
+
+            <perfect-scrollbar>
+                <div class="contact-container container-block">
+                    <ul class="list-unstyled contact-list">
+                        <li class="email">
+                            <i class="fa fa-envelope-o"></i>
+                            <a *ngIf="!emailEditSelfState" href="{{form.value.email}}" class="text-truncate">{{form.value.email}}</a>
+                            <input
+                                *ngIf="emailEditSelfState"
+                                formControlName="email"
+                                type="text"
+                                class="form-control custom-control small"
+                                pTooltip="Enter email"
+                                tooltipPosition="top"
+                            />
+                            <cv-edit-button
+                                *ngIf="resumeDetail.state === StatesEnum.Edit"
+                                (click)="emailEditSelfState = !emailEditSelfState"
+                            ></cv-edit-button>
+                        </li>
+                        <li class="skype">
+                            <i class="fa fa-skype" aria-hidden="true"></i>
+                            <a *ngIf="!skypeEditSelfState" href="{{form.value.skype}}" class="text-truncate">{{form.value.skype}}</a>
+                            <input
+                                *ngIf="skypeEditSelfState"
+                                formControlName="skype"
+                                type="text"
+                                class="form-control custom-control small"
+                                pTooltip="Enter skype"
+                                tooltipPosition="top"
+                            />
+                            <cv-edit-button
+                                *ngIf="resumeDetail.state === StatesEnum.Edit"
+                                (click)="skypeEditSelfState = !skypeEditSelfState"
+                            ></cv-edit-button>
+                        </li>
+                    </ul>
+                </div><!--//contact-container-->
+
+                <div class="social-profiles-container container-block">
+                    <h2 class="container-block-title">Social Profiles</h2>
+                    <cv-edit-button
+                        *ngIf="resumeDetail.state === StatesEnum.Edit"
+                        class="medium"
+                        (click)="socialProfilesEditSelfState = !socialProfilesEditSelfState"
+                    ></cv-edit-button>
+
+                    <cv-social-profile-array
+                        [parentForm]="form"
+                        [socialProfiles]="resumeDetail.result?.social_profiles"
+                        [networkTypes]="networkTypes"
+                        [socialProfilesEditSelfState]="socialProfilesEditSelfState"
+                    ></cv-social-profile-array>
+                </div><!-- social sprofiles container -->
+
+                <div class="phones-container container-block">
+                    <h2 class="container-block-title">Phones</h2>
+                    <cv-edit-button
+                    *ngIf="resumeDetail.state === StatesEnum.Edit"
+                        class="medium"
+                        (click)="phonesEditSelfState= !phonesEditSelfState"
+                    ></cv-edit-button>
+                    <cv-phone-array
+                        [parentForm]="form"
+                        [phoneNumbers]="resumeDetail.result?.phoneNumbers"
+                        [phoneTypes]="phoneTypes"
+                        [phonesEditSelfState]="phonesEditSelfState"
+                    ></cv-phone-array>
+                </div><!-- phones container -->
+
+                <div class="education-container container-block">
+                    <h2 class="container-block-title">Education</h2>
+                    <cv-edit-button
+                        *ngIf="resumeDetail.state === StatesEnum.Edit"
+                        class="medium"
+                        (click)="educationEditSelfState = !educationEditSelfState"
+                    ></cv-edit-button>
+                    <cv-education-array
+                        [parentForm]="form"
+                        [education]="resumeDetail.result?.education"
+                        [educationEditSelfState]="educationEditSelfState"
+                    ></cv-education-array>
+                </div><!--//education-container-->
+
+                <div class="languages-container container-block">
+                    <h2 class="container-block-title">Languages</h2>
+                    <cv-edit-button
+                        *ngIf="resumeDetail.state === StatesEnum.Edit"
+                        class="medium"
+                        (click)="languageEditSelfState = !languageEditSelfState"
+                    ></cv-edit-button>
+                    <cv-language-array
+                        [parentForm]="form"
+                        [languages]="resumeDetail.result?.languages"
+                        [languageEditSelfState]="languageEditSelfState"
+                    ></cv-language-array>
+                </div><!--//interests-->
+
+                <div class="interests-container container-block">
+                    <h2 class="container-block-title">Interests</h2>
+                    <cv-edit-button
+                        *ngIf="resumeDetail.state === StatesEnum.Edit"
+                        class="medium"
+                        (click)="interestEditSelfState = !interestEditSelfState"
+                    ></cv-edit-button>
+                    <cv-interest-array
+                        [parentForm]="form"
+                        [interests]="resumeDetail.result?.interests"
+                        [interestEditSelfState]="interestEditSelfState"
+                    ></cv-interest-array>
+                </div>
+                <!--//interests-->
+                <pre>{{ form.value | json }}</pre>
+            </perfect-scrollbar>
+
+        </div><!--//sidebar-wrapper-->
+
+        <div class="main-wrapper">
+            <perfect-scrollbar>
+                <div class="section-wrapper">
+                    <section class="section summary-section">
+                        <h2 class="section-title"><i class="fa fa-user"></i>Career Profile</h2>
+                        <cv-edit-button
+                            *ngIf="resumeDetail.state === StatesEnum.Edit"
+                            class="large colorGreen"
+                            (click)="profileEditSelfState = !profileEditSelfState"
+                        ></cv-edit-button>
+                        <div class="summary">
+                            <p *ngIf="!profileEditSelfState">{{form.value.profile}}</p>
+                            <textarea
+                                formControlName="profile"
+                                *ngIf="profileEditSelfState"
+                                class="form-control"
+                                rows="5"
+                                id="comment"
+                            ></textarea>
+                        </div><!--//summary-->
+                    </section><!--//section-->
+
+                    <!--<section class="section experience-section">
+                        <h2 class="section-title"><i class="fa fa-briefcase"></i>do</h2>
+                        <cv-edit-button
+                            *ngIf="resumeDetail.state === StatesEnum.Edit"
+                            class="large colorGreen"
+                            (click)="socialProfilesEditSelfState1 = !socialProfilesEditSelfState1"
+                        ></cv-edit-button>
+                        <cv-do
+                            [parentForm]="form"
+                            [socialProfiles]="resumeDetail.result?.social_profiles"
+                            [networkTypes]="networkTypes"
+                            [socialProfilesEditSelfState1]="socialProfilesEditSelfState1"
+                        ></cv-do>
+                    </section>-->
+
+                    <!--<section class="section experience-section">
+                        <h2 class="section-title"><i class="fa fa-briefcase"></i>try</h2>
+                        <cv-edit-button
+                            *ngIf="resumeDetail.state === StatesEnum.Edit"
+                            class="large colorGreen"
+                            (click)="experienceEditSelfState = !experienceEditSelfState"
+                        ></cv-edit-button>
+                        <cv-try
+                            [parentForm]="form"
+                            [experience]="resumeDetail.result?.work_experience"
+                            [experienceEditSelfState]="experienceEditSelfState"
+                        ></cv-try>
+                    </section>-->
+                    <!--//section-->
+
+                    <section class="section experience-section">
+                        <h2 class="section-title"><i class="fa fa-briefcase"></i>Experience</h2>
+                        <cv-edit-button
+                            *ngIf="resumeDetail.state === StatesEnum.Edit"
+                            class="large colorGreen"
+                            (click)="experienceEditSelfState = !experienceEditSelfState"
+                        ></cv-edit-button>
+                        <cv-experience-array
+                            [parentForm]="form"
+                            [experience]="resumeDetail.result?.work_experience"
+                            [experienceEditSelfState]="experienceEditSelfState"
+                        ></cv-experience-array>
+                    </section>
+                    <!--//section-->
+
+                    <section class="section projects-section">
+                        <h2 class="section-title"><i class="fa fa-archive"></i>Projects</h2>
+                        <cv-edit-button
+                            *ngIf="resumeDetail.state === StatesEnum.Edit"
+                            class="large colorGreen"
+                            (click)="projectsEditSelfState = !projectsEditSelfState"
+                        ></cv-edit-button>
+                        <cv-project-array
+                            [parentForm]="form"
+                            [projects]="resumeDetail.result?.pet_projects"
+                            [projectsEditSelfState]="projectsEditSelfState"
+                        ></cv-project-array>
+                    </section><!--//section-->
+
+                    <section class="skills-section section">
+                        <h2 class="section-title"><i class="fa fa-rocket"></i>Skills &amp; Proficiency</h2>
+                        <cv-edit-button
+                            *ngIf="resumeDetail.state === StatesEnum.Edit"
+                            class="large colorGreen"
+                            (click)="skillsEditSelfState = !skillsEditSelfState"
+                        ></cv-edit-button>
+                        <cv-skill-array
+                            [parentForm]="form"
+                            [skills]="resumeDetail.result?.skills"
+                            [skillsEditSelfState]="skillsEditSelfState"
+                        ></cv-skill-array>
+                    </section><!--//skills-section-->
+
+                    <div class="form-group">
+                        <button type="button" class="btn" (click)="edit()" *ngIf="resumeDetail.state !== StatesEnum.Edit">Edit</button>
+                        <button type="button" class="btn" (click)="save()" *ngIf="resumeDetail.state === StatesEnum.Edit">Save</button>
+                        <button type="button" class="btn" (click)="delete()">Delete</button>
+                        <!--<button type="button" class="btn" (click)="create()">Create</button>-->
+                        <!--<a href="#" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></a>-->
+                    </div>
+                </div>
+            </perfect-scrollbar>
+        </div>
+        <!--//main-body-->
+    </form>
+</div>

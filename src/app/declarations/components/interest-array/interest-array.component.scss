@@ -1,0 +1,15 @@
+.interests-list {
+    margin-bottom: 0;
+    li {
+        margin-bottom: 10px;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+.list-unstyled {
+    .fa {
+        display: inline-block;
+        padding: 3px;
+    }
+}

@@ -1,0 +1,22 @@
+// main {
+//     background: #0147A7;
+//     color: red;
+// }
+// body {
+//     // -moz-osx-font-smoothing: grayscale;
+//     // -webkit-font-smoothing: antialiased;
+//     // background: $smoky-white;
+//     // color: $text-color-secondary;
+//     font-family: 'Roboto', sans-serif;
+//     font-size: 14px;
+//     padding: 30px;
+// }
+
+// h1, h2, h3, h4, h5, h6  {
+// /deep/{
+  h1  {
+      font-weight: 700;
+      display: inline-block;
+      color: green;
+  }
+// }

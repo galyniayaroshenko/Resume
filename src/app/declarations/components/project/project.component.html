@@ -1,0 +1,44 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span>Project {{index + 1}}</span>
+        <span
+            class="glyphicon glyphicon-remove pull-right"
+            *ngIf="formArray.length > 1"
+            (click)="removed.emit()"
+        ></span>
+    </div>
+    <div class="panel-body">
+        <div [formGroup]="projectGroup">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input formControlName="title" type="text" class="form-control" id="title">
+            </div>
+            <div class="form-group">
+                <label for="position">Position</label>
+                <input formControlName="position" type="text" class="form-control" id="position">
+            </div>
+            <div class="form-group">
+                <label for="startData">Start data</label>
+                <input formControlName="startDate" type="text" class="form-control" id="startData">
+            </div>
+            <div class="form-group">
+                <label for="endDate">End date</label>
+                <input formControlName="endDate" type="text" class="form-control" id="endDate">
+            </div>
+            <div class="form-group">
+                <label for="descriptions">Descriptions</label>
+                <textarea formControlName="descriptions" class="form-control" rows="5" id="descriptions"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="link">Website</label>
+                <input formControlName="website" class="form-control" rows="5" id="link"/>
+            </div>
+            <div class="form-group">
+                <label for="type">Type</label>
+                <input formControlName="type" class="form-control" rows="5" id="type"/>
+            </div>
+
+            <cv-tool-array [parentForm]="projectGroup" [tools]="project?.tools"></cv-tool-array>
+        </div>
+    </div>
+</div>

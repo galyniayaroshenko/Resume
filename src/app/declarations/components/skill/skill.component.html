@@ -1,0 +1,19 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span>Skill {{index + 1}}</span>
+        <span
+            class="glyphicon glyphicon-remove pull-right"
+            *ngIf="formArray.length > 1"
+            (click)="removed.emit()"
+        ></span>
+    </div>
+    <div class="panel-body">
+        <div [formGroup]="skillGroup">
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" class="form-control" formControlName="name">
+            </div>
+            <cv-tool-array [parentForm]="skillGroup" [tools]="skill?.tools"></cv-tool-array>
+        </div>
+    </div>
+</div>

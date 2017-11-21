@@ -1,0 +1,14 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span>Tool {{index + 1}}</span>
+        <span class="glyphicon glyphicon-remove pull-right" (click)="removed.emit()"></span>
+    </div>
+    <div class="panel-body">
+        <div [formGroup]="toolGroup">
+            <div class="form-group">
+                <label>Text</label>
+                <input type="text" class="form-control" formControlName="name">
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+// /deep/ {
+    /* Extra small devices (phones, less than 768px) */
+    @media (max-width: 767px) {
+        .sidebar-wrapper {
+            position: static;
+            width: inherit;
+            text-align: center;
+        }
+        .main-wrapper {
+            padding: 30px;
+        }
+        .main-wrapper .time {
+            display: block;
+            margin-top: 5px;
+            position: static;
+        }
+        .main-wrapper .upper-row {
+            margin-bottom: 0;
+        }
+    }
+    /* Small devices (tablets, 768px and up) */
+    @media (min-width: 768px) {}
+
+    /* Medium devices (desktops, 992px and up) */
+    @media (min-width: 992px) {
+        .skillset .level-title {
+            display: inline-block;
+            margin-bottom: 0;
+            width: 30%;
+        }
+        .skillset .level-bar {
+            display: inline-block;
+            position: relative;
+            top: 1px;
+            width: 70%;
+        }
+    }
+
+    /* Large devices (large desktops, 1200px and up) */
+    @media (min-width: 1200px) {}
+
+    /* Ex-Large devices (large desktops, 1200px and up) */
+    @media (min-width: 1400px) {}
+// }

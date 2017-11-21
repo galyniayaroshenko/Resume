@@ -1,0 +1,40 @@
+<ul class="list-unstyled interests-list">
+    <li *ngFor="let phoneNumber of phoneNumbers; let i=index">
+        <div *ngIf="!phonesEditSelfState">
+            <i class="fa fa-{{phoneNumber.type}}"></i>
+            <a href="tel:{{phoneNumber.number}}">{{phoneNumber.number}}</a>
+        </div>
+    </li>
+</ul>
+<div *ngIf="phonesEditSelfState">
+    <div
+        *ngFor="let phoneNumber of parentForm.controls.phoneNumber.controls; let i=index"
+        [formGroup]="parentForm.controls.phoneNumber.controls[i]"
+    >
+        <span
+            class="glyphicon glyphicon-remove pull-right form-group"
+            *ngIf="parentForm.controls.phoneNumber.controls.length > 1"
+            (click)="removePhone(i)"
+        ></span>
+        <div class="form-group">
+            <input
+                formControlName="number"
+                type="text"
+                class="form-control custom-control large"
+                pTooltip="Enter phone"
+                tooltipPosition="top"
+            />
+        </div>
+        <div class="form-group">
+            <select
+                class="form-control custom-control large"
+                formControlName="type"
+                pTooltip="Select phone type"
+                tooltipPosition="top"
+            >
+                <option *ngFor="let phoneType of phoneTypes" [value]="phoneType">{{phoneType}}</option>
+            </select>
+        </div>
+    </div>
+    <button (click)="addPhone()" class="btn btn-default">Add another phone + </button>
+</div>

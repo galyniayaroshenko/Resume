@@ -1,0 +1,32 @@
+<div *ngIf="!experienceEditSelfState">
+    <div class="item" *ngFor="let experience of parentForm.value.work_experience; let i=index">
+        <div class="meta">
+            <div class="upper-row">
+                <h3 class="job-title">{{experience.position}}</h3>
+                <div class="time">{{experience.startDate}} - {{experience.endDate}}</div>
+            </div>
+            <div class="company">{{experience.location}}</div>
+        </div>
+        <div class="details"><p>{{experience.details}}</p></div>
+        <div>Website - {{experience.website || 'None'}}</div>
+        <span>Tools:</span>
+        <span *ngFor="let tool of experience.tools; let i = index">
+            {{tool.name || 'None'}},
+        </span>
+        <div>Responsibilities - {{experience.responsibilities || 'None'}}</div>
+    </div>
+</div>
+<div *ngIf="experienceEditSelfState" [formGroup]="parentForm">
+    <div formArrayName="work_experience">
+        <cv-experience
+            *ngFor="let experience of experience; let i = index"
+            [formArray]="parentForm.controls.work_experience"
+            [experience]="experience"
+            (removed)="removeExperience(i)"
+        ></cv-experience>
+    </div>
+    <button (click)="addExperience()" class="btn btn-default">
+        Add another experience +
+    </button>
+</div>
+<!--<pre>{{ parentForm.value.work_experience | json }}</pre>-->

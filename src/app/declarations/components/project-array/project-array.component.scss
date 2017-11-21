@@ -1,0 +1,36 @@
+$theme-color: #4CAC9D;
+$text-color: #3F4650;
+$text-color-secondary: #545E6C;
+$text-grey: #97AAC3;
+$divider: #e8e8e8;
+$lighter-grey: #ccc;
+$darker-grey: #666;
+$smoky-white: #f5f5f5;
+$heart: #fb866a;
+
+.upper-row {
+    margin-bottom: 2px;
+    overflow: hidden;
+    position: relative;
+}
+.job-title {
+    color: $text-color;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+.time {
+    color: $text-grey;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.company {
+    color: $text-grey;
+    margin-bottom: 10px;
+}
+
+.item {
+    margin-bottom: 40px;
+}

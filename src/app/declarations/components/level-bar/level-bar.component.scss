@@ -1,0 +1,11 @@
+$smoky-white: #f5f5f5;
+$theme-color: #4CAC9D;
+
+.level-bar {
+    background: $smoky-white;
+    height: 12px;
+}
+.level-bar-inner {
+    background: lighten($theme-color, 15%);
+    height: 12px;
+}
