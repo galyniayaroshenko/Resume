@@ -6,20 +6,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditButtonComponent } from '../../../../declarations/components/edit-button';
 import { EducationArrayComponent } from '../../../../declarations/components/education-array';
 import { ExperienceArrayComponent } from '../../../../declarations/components/experience-array';
+import { ExperienceComponent } from '../../../../declarations/components/experience';
 import { HighlightComponent } from '../../../../declarations/components/highlight';
 import { HighlightDirective } from '../../../../declarations/directives/highlight';
+import { InterestArrayComponent } from '../../../../declarations/components/interest-array';
 import { LanguageArrayComponent } from '../../../../declarations/components/language-array';
 import { LevelBarComponent } from '../../../../declarations/components/level-bar';
 import { PhoneArrayComponent } from '../../../../declarations/components/phone-array';
 import { ProjectArrayComponent } from '../../../../declarations/components/project-array';
-import { SocialProfileArrayComponent } from '../../../../declarations/components/social-profile-array';
+import { ProjectComponent } from '../../../../declarations/components/project';
 import { SkillArrayComponent } from '../../../../declarations/components/skill-array';
 import { SkillComponent } from '../../../../declarations/components/skill';
+import { SocialProfileArrayComponent } from '../../../../declarations/components/social-profile-array';
 import { ToolArrayComponent } from '../../../../declarations/components/tool-array';
 import { ToolComponent } from '../../../../declarations/components/tool';
-import { ProjectComponent } from '../../../../declarations/components/project';
-import { ExperienceComponent } from '../../../../declarations/components/experience';
-import { InterestArrayComponent } from '../../../../declarations/components/interest-array';
+import { ValidationErrorComponent } from '../../../../declarations/components/validation-error';
 
 import { TryComponent } from '../../../../declarations/components/try';
 import { Try1Component } from '../../../../declarations/components/try1';
@@ -31,22 +32,24 @@ import { ResumeDetailView } from './resume-detail.view';
 import { TooltipModule } from 'primeng/primeng';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
+
 @NgModule({
   declarations: [
     // EditDirective,
     EditButtonComponent,
     EducationArrayComponent,
     ExperienceArrayComponent,
+    ExperienceComponent,
     HighlightComponent,
     HighlightDirective,
+    InterestArrayComponent,
     LanguageArrayComponent,
     LevelBarComponent,
     PhoneArrayComponent,
     ProjectArrayComponent,
-    SocialProfileArrayComponent,
     ProjectComponent,
-    ExperienceComponent,
-    InterestArrayComponent,
+    SocialProfileArrayComponent,
+    ValidationErrorComponent,
 
     TryComponent,
     Try1Component,

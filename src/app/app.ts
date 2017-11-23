@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
-
-import '../assets/css/styles.css';
-// import '../styles/main.scss';
+import { ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'my-app',
   templateUrl: './app.html',
-  // styleUrls: ['./app.scss', '../styles/main.scss']
-  styleUrls: ['./app.scss']
+  styleUrls: ['./app.scss', '../styles/main.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class App {}

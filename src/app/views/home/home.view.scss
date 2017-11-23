@@ -1,5 +1,4 @@
-$theme-color: #4CAC9D;
-$smoky-white: #f5f5f5;
+@import '../../../styles/_variables';
 
 :host /deep/ {
   display: block;
@@ -7,7 +6,7 @@ $smoky-white: #f5f5f5;
   padding-bottom: 60px;
   position: relative;
   background-color: $smoky-white;
-  min-width: 1200px;
+  min-width: 350px;
 }
 
 .wrapper {
@@ -80,5 +79,13 @@ footer {
     color: white;
     font-size: 12px;
     padding-top: 24px;
+  }
+}
+
+/* responsive design */
+/* Extra small devices (phones, less than 768px) */
+@media (max-width: 767px) {
+  .wrapper {
+    margin: 0 10px;
   }
 }

@@ -1,27 +1,36 @@
+// !duplicate code
 a {
-    // @include transition(all 0.4s ease-in-out);
-    // color: darken($theme-color, 15%);
-    color: white;
-    &:hover {
-        // color: darken($theme-color, 30%);
-        text-decoration: underline;
-    }
-    &:focus {
-        text-decoration: none;
-    }
+// @include transition(all 0.4s ease-in-out);
+// color: darken($theme-color, 15%);
+  color: white;
+  &:hover {
+    // color: darken($theme-color, 30%);
+    text-decoration: underline;
+  }
+  &:focus {
+    text-decoration: none;
+  }
 }
 .interests-list {
-    margin-bottom: 0;
-    li {
-        margin-bottom: 10px;
-        &:last-child {
-            margin-bottom: 0;
-        }
+  margin-bottom: 0;
+  li {
+    margin-bottom: 10px;
+    &:last-child {
+      margin-bottom: 0;
     }
+  }
 }
 .list-unstyled {
-    .fa {
-        display: inline-block;
-        padding: 3px;
-    }
+  .fa {
+    display: inline-block;
+    padding: 3px;
+  }
+}
+
+.text-truncate {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 195px;
 }

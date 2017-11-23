@@ -15,12 +15,9 @@ import { routing } from './home.view.routing';
 import { ResumeDetailResolve } from './resolves/resume-detail';
 import { ResumeListResolve } from './resolves/resume-list';
 
-import { ValidationErrorComponent } from '../../declarations/components/validation-error';
-
 @NgModule({
   declarations: [
-    HomeView,
-    ValidationErrorComponent
+    HomeView
   ],
   imports: [
     CommonModule,

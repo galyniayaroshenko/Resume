@@ -32,7 +32,11 @@ export class ResumeListView {
     console.log('event', event.data.id);
     // this.router.navigate([`../resume-detail`, { resumeId: 1 }], { relativeTo: this.activatedRoute });
     // this.router.navigate(['cv/resume-detail', { id: 1 }]);
-    this.router.navigate([`cv/resume-detail/${event.data.id}`]);
+    this.router.navigate([`cv/resume/${event.data.id}`]);
     // this.router.navigateByUrl(`cv/resume-detail/${id}`);
+  }
+
+  create(): void {
+    this.router.navigate([`cv/resume`]);
   }
 }

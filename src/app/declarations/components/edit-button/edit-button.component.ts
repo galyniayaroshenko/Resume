@@ -10,6 +10,7 @@ export class EditButtonComponent {
   visible: Boolean = true;
 
   @Input() class: String;
+  @Input() disabled: Boolean;
 
   editSelf(): void {
     this.visible = !this.visible;

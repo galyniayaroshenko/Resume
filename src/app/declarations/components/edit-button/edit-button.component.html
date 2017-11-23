@@ -1,9 +1,8 @@
 <button
   class="btn btn-default btn-edit {{visible ? class : ''}}"
   (click)="editSelf()"
+  [disabled]="disabled"
 >
-  <!--class="btn btn-default btn-edit {{visible ? class : ''}}"-->
-
   <i
     class="glyphicon {{class}}"
     [ngClass]="{

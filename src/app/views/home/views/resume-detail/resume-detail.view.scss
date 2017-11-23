@@ -1,14 +1,355 @@
-$fa-font-path: "../node_modules/font-awesome/fonts";
-@import '~font-awesome/scss/font-awesome.scss';
+@import '../../../../../styles/_variables';
+@import '../../../../../styles/_mixins';
 
-@import "_mixins";
-@import "_theme-default";
-@import "_base";
-@import "_responsive";
+.wrapper-form {
+  @include box-shadow(0px 2px 4px rgba(0,0,0,0.1));
+  background: $theme-color;
+  margin: 0 auto;
+  max-width: 1024px;
+  min-width: 320px;
+  position: relative;
+}
 
-$smoky-white: #f5f5f5;
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 160px;
+}
+
+.sidebar-wrapper {
+  background: $theme-color;
+  color: #fff;
+  height: 100%;
+  min-height: 800px;
+  position: absolute;
+  right: 0;
+  width: 280px;
+  a {
+    color: #fff;
+    display: inline-block;
+  }
+  .profile-container {
+    background: darken($theme-color, 10%);
+    color: #fff;
+    padding: 30px;
+    text-align: center;
+  }
+  .name {
+    font-size: 32px;
+    font-weight: 900;
+    margin-bottom: 10px;
+    margin-top: 0;
+  }
+  .tagline {
+    color: rgba(256, 256, 256, 0.6);
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+  .profile {
+    border-radius: 50px;
+    margin-bottom: 15px;
+    object-fit: none;
+    object-position: center;
+    height: 100px;
+    width: 100px;
+  }
+  .contact-list {
+    .fa {
+      font-size: 18px;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+    li {
+      margin-bottom: 15px;
+      &:last-child {
+          margin-bottom: 0;
+      }
+    }
+    .fa {
+      font-size: 14px;
+    }
+  }
+  .container-block {
+    padding: 30px;
+  }
+  .container-block-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    margin-top: 0;
+    text-transform: uppercase;
+  }
+  .degree {
+      font-size: 14px;
+      margin-bottom: 5px;
+      margin-top: 0;
+  }
+  .education-container {
+    .item {
+      margin-bottom: 15px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    .meta {
+      color: rgba(256, 256, 256, 0.6);
+      font-weight: 500;
+      margin-bottom: 0px;
+      margin-top: 0;
+    }
+    .time {
+      color: rgba(256, 256, 256, 0.6);
+      font-weight: 500;
+      margin-bottom: 0px;
+    }
+  }
+  .languages-container {
+    .lang-desc {
+      color: rgba(256, 256, 256, 0.6);
+    }
+  }
+
+  .languages-list {
+    margin-bottom: 0;
+    li {
+      margin-bottom: 10px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .interests-list {
+    margin-bottom: 0;
+    li {
+      margin-bottom: 10px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+  .list-unstyled {
+    .fa {
+      display: inline-block;
+      // margin-bottom: 10px;
+      padding: 3px;
+    }
+  }
+}
+
+.main-wrapper {
+  background: #fff;
+  padding: 60px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  padding-right: 300px;
+
+  .section-wrapper {
+    padding-right: 50px;
+  }
+
+  .section-title {
+    color: darken($theme-color, 15%);
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    margin-top: 0;
+    position: relative;
+    text-transform: uppercase;
+    .fa {
+      @include border-radius(50%);
+      background: darken($theme-color, 15%);
+      color: #fff;
+      display: inline-block;
+      font-size: 16px;
+      height: 30px;
+      margin-right: 8px;
+      padding-top: 8px;
+      position: relative;
+      text-align: center;
+      top: 0px;
+      width: 30px;
+    }
+  }
+  .section {
+    margin-bottom: 60px;
+  }
+
+  .experiences-section {
+    .item {
+      margin-bottom: 30px;
+    }
+  }
+  .upper-row {
+    margin-bottom: 2px;
+    overflow: hidden;
+    position: relative;
+  }
+  .job-title {
+    color: $text-color;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+  .time {
+    color: $text-grey;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .company {
+    color: $text-grey;
+    margin-bottom: 10px;
+  }
+
+  .project-title {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 5px;
+    margin-top: 0;
+  }
+  .projects-section {
+    .intro {
+      margin-bottom: 30px;
+    }
+    .item {
+      margin-bottom: 15px;
+    }
+  }
+  // .skills-section {
+  //     // .intro {
+  //     //     margin-bottom: 30px;
+  //     // }
+  //     .item {
+  //         margin-bottom: 15px;
+  //     }
+  // }
+}
+
+.skillset {
+  .item {
+    margin-bottom: 15px;
+    overflow: hidden;
+  }
+  .level-title {
+    font-size: 14px;
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+  .level-bar {
+    background: $smoky-white;
+    height: 12px;
+  }
+  .level-bar-inner {
+    background: lighten($theme-color, 15%);
+    height: 12px;
+  }
+}
+
+.footer {
+  padding: 30px;
+  padding-top: 60px;
+  .copyright {
+    color: $text-color-secondary;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .fa-heart {
+    color: $heart;
+  }
+}
+
+/* form */
+.custom-control {
+  display: inline-block;
+  width: 82%;
+  height: auto;
+
+  &.small {
+    padding: 2px 12px;
+    width: 71%;
+  }
+  &.medium {
+    padding: 3px 12px;
+  }
+  &.large {
+    padding: 4px 12px;
+  }
+  &.error {
+    border: 1px solid red;
+  }
+}
+.custom-textarea-control {
+  &.error {
+    border: 1px solid red;
+  }
+}
 
 :host /deep/ {
-  display: block;
-  background-color: $smoky-white;
+  .main-wrapper {
+    perfect-scrollbar {
+      height: auto;
+        & >.ps {
+          height: 1200px;
+        }
+    }
+  }
+
+  .sidebar-wrapper {
+    perfect-scrollbar {
+      height: auto;
+        & >.ps {
+          height: 970px;
+        }
+    }
+  }
 }
+
+/* responsive design */
+/* Extra small devices (phones, less than 768px) */
+@media (max-width: 767px) {
+  .sidebar-wrapper {
+    position: static;
+    width: inherit;
+    text-align: center;
+  }
+  .main-wrapper {
+    padding: 30px;
+  }
+  .main-wrapper .time {
+    display: block;
+    margin-top: 5px;
+    position: static;
+  }
+  .main-wrapper .upper-row {
+    margin-bottom: 0;
+  }
+}
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .skillset .level-title {
+    display: inline-block;
+    margin-bottom: 0;
+    width: 30%;
+  }
+  .skillset .level-bar {
+    display: inline-block;
+    position: relative;
+    top: 1px;
+    width: 70%;
+  }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {}
+
+/* Ex-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1400px) {}

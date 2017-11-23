@@ -1,7 +1,7 @@
 <ul *ngIf="!socialProfilesEditSelfState" class="list-unstyled interests-list">
     <li *ngFor="let socialProfile of parentForm.value.socialProfiles; let i=index">
         <i class="fa fa-{{socialProfile.network}}"></i>
-        <a href="tel:{{socialProfile.url}}">{{socialProfile.url}}</a>
+        <a href="tel:{{socialProfile.url}}" class="text-truncate">{{socialProfile.url}}</a>
     </li>
 </ul>
 <div *ngIf="socialProfilesEditSelfState">
