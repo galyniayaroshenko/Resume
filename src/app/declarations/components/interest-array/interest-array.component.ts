@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 
+import { StatesEnum } from '../../../models/resume';
+
 @Component({
   selector: 'cv-interest-array',
   styleUrls: ['./interest-array.component.scss'],
@@ -8,19 +10,26 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 })
 
 export class InterestArrayComponent {
+  StatesEnum = StatesEnum;
+
   @Input('parentForm') parentForm: FormGroup;
   @Input('interestEditSelfState') interestEditSelfState: Boolean;
   @Input('interests') interests: any;
+  @Input('state') state: any;
 
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
     this.parentForm.addControl(
       'interests',
-      this.formBuilder.array(
+      (!this.interests ? new FormArray([]) : this.formBuilder.array(
         this.interests.map((item: any) => this.formBuilder.group(item))
-      )
+      ))
     );
+
+    if (this.state === StatesEnum.Create) {
+      this.addInterest();
+    }
   }
 
   get arrInterests(): FormArray {

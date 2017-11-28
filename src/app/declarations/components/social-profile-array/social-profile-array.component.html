@@ -1,10 +1,10 @@
-<ul *ngIf="!socialProfilesEditSelfState" class="list-unstyled interests-list">
+<ul *ngIf="!socialProfilesEditSelfState && state !== StatesEnum.Create" class="list-unstyled interests-list">
     <li *ngFor="let socialProfile of parentForm.value.socialProfiles; let i=index">
         <i class="fa fa-{{socialProfile.network}}"></i>
         <a href="tel:{{socialProfile.url}}" class="text-truncate">{{socialProfile.url}}</a>
     </li>
 </ul>
-<div *ngIf="socialProfilesEditSelfState">
+<div *ngIf="socialProfilesEditSelfState || state === StatesEnum.Create">
     <div
         *ngFor="let socialProfile of parentForm.controls.socialProfiles.controls; let i=index"
         [formGroup]="parentForm.controls.socialProfiles.controls[i]"

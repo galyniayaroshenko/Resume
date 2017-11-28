@@ -20,7 +20,7 @@ export const routing = RouterModule.forChild([
         }
       },
       {
-        path: 'resume/:id',
+        path: 'resume',
         component: ResumeDetailView,
         resolve: {
           resumeDetail: ResumeDetailResolve

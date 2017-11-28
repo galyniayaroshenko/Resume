@@ -35,6 +35,10 @@
     padding: 30px;
     text-align: center;
   }
+  .edit-main-container {
+    background: darken($theme-color, 10%);
+    padding: 30px;
+  }
   .name {
     font-size: 32px;
     font-weight: 900;
@@ -290,6 +294,10 @@
   }
 }
 
+.wrapper-button {
+  margin-top: 30px;
+}
+
 :host /deep/ {
   .main-wrapper {
     perfect-scrollbar {
@@ -304,8 +312,26 @@
     perfect-scrollbar {
       height: auto;
         & >.ps {
-          height: 970px;
+          height: 1094px;
         }
+    }
+
+    &.create {
+      perfect-scrollbar {
+        height: auto;
+          & >.ps {
+            height: 1399px;
+          }
+      }
+    }
+
+    &.edit {
+      perfect-scrollbar {
+        height: auto;
+          & >.ps {
+            height: 1049px;
+          }
+      }
     }
   }
 }

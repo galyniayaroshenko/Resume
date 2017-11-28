@@ -1,11 +1,11 @@
-<div *ngIf="!educationEditSelfState" class="form-group">
+<div *ngIf="!educationEditSelfState && state !== StatesEnum.Create" class="form-group">
     <div *ngFor="let education of education; let i=index" class="item">
         <h4 class="degree">{{education.level_qualifications}}</h4>
         <h5 class="meta">{{education.school}} ({{education.area}})</h5>
         <div class="time">{{education.startDate}} - {{education.endDate}}</div>
     </div>
 </div>
-<div *ngIf="educationEditSelfState">
+<div *ngIf="educationEditSelfState || state === StatesEnum.Create">
     <div *ngFor="let education of parentForm.controls.education.controls; let i=index">
         <span
             class="glyphicon glyphicon-remove pull-right form-group"

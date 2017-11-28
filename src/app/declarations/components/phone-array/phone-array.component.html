@@ -1,12 +1,10 @@
-<ul class="list-unstyled interests-list">
+<ul class="list-unstyled interests-list" *ngIf="!phonesEditSelfState && state !== StatesEnum.Create">
     <li *ngFor="let phoneNumber of phoneNumbers; let i=index">
-        <div *ngIf="!phonesEditSelfState">
-            <i class="fa fa-{{phoneNumber.type}}"></i>
-            <a href="tel:{{phoneNumber.number}}">{{phoneNumber.number}}</a>
-        </div>
+        <i class="fa fa-{{phoneNumber.type}}"></i>
+        <a href="tel:{{phoneNumber.number}}">{{phoneNumber.number}}</a>
     </li>
 </ul>
-<div *ngIf="phonesEditSelfState">
+<div *ngIf="phonesEditSelfState || state === StatesEnum.Create">
     <div
         *ngFor="let phoneNumber of parentForm.controls.phoneNumber.controls; let i=index"
         [formGroup]="parentForm.controls.phoneNumber.controls[i]"
@@ -24,6 +22,7 @@
                 pTooltip="Enter phone"
                 tooltipPosition="top"
             />
+            <!--<validation-error [control]="parentForm.get('number')"></validation-error>-->
         </div>
         <div class="form-group">
             <select
@@ -34,6 +33,7 @@
             >
                 <option *ngFor="let phoneType of phoneTypes" [value]="phoneType">{{phoneType}}</option>
             </select>
+            <!--<validation-error [control]="parentForm.get('type')"></validation-error>-->
         </div>
     </div>
     <button (click)="addPhone()" class="btn btn-default">Add another phone + </button>

@@ -24,7 +24,8 @@ export class ResumeDetailView {
   form: FormGroup;
   ctrl: AbstractControl;
 
-  resumeDetail: IResumeModel;
+  // resumeDetail: IResumeModel;
+  resumeDetail: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -40,6 +41,9 @@ export class ResumeDetailView {
     this.activatedRoute.data.subscribe(data => {
        this.resumeDetail = data['resumeDetail'];
        console.log('this.resumeDetail!', this.resumeDetail);
+       console.log('etalon', this.resumeDetail.etalon);
+       console.log('etalon', this.resumeDetail.etalon.name);
+        console.log('this.resumeDetail.result.name', this.resumeDetail.result);
     });
 
     this.phoneTypes = ['phone', 'mobile'];
@@ -48,6 +52,12 @@ export class ResumeDetailView {
     console.log('resumeDetail.state', this.resumeDetail.state);
 
     this.formBuild();
+
+    if (this.resumeDetail.state === StatesEnum.Create) {
+      this.addExperience();
+      this.addProject();
+      this.addSkill();
+    }
   }
 
   get experienceControl(): FormArray {
@@ -120,26 +130,26 @@ export class ResumeDetailView {
   private formBuild(): void {
     this.form = this.formBuilder.group({
       name: [
-        this.resumeDetail.result.name,
+        this.resumeDetail.result ? this.resumeDetail.result.name : '',
         [requiredValidator, minLengthValidator(10), maxLengthValidator(16)]
       ],
       position: [
-        this.resumeDetail.result.position,
+        this.resumeDetail.result ? this.resumeDetail.result.position : '',
         [requiredValidator, minLengthValidator(3), maxLengthValidator(15)]
       ],
       email: [
-        this.resumeDetail.result.email,
+        this.resumeDetail.result ? this.resumeDetail.result.email : '',
         [requiredValidator, emailValidator]
       ],
       skype: [
-        this.resumeDetail.result.skype,
+        this.resumeDetail.result ? this.resumeDetail.result.skype : '',
         [requiredValidator]
       ],
       profile: [
-        this.resumeDetail.result.profile,
+        this.resumeDetail.result ? this.resumeDetail.result.profile : '',
         [requiredValidator, minLengthValidator(10), maxLengthValidator(350)]
       ],
-      experience: this.formBuilder.array(
+      experience: !this.resumeDetail.result ? new FormArray([]) : this.formBuilder.array(
         this.resumeDetail.result.work_experience.map(
           (item: any) => this.formBuilder.group({
             position: [
@@ -164,7 +174,7 @@ export class ResumeDetailView {
           })
         )
       ),
-      projects: this.formBuilder.array(
+      projects: !this.resumeDetail.result ? new FormArray([]) : this.formBuilder.array(
         this.resumeDetail.result.pet_projects.map(
           (item: any) => this.formBuilder.group({
             title: [
@@ -192,7 +202,7 @@ export class ResumeDetailView {
           })
         )
       ),
-      skills: this.formBuilder.array(
+      skills: !this.resumeDetail.result ? new FormArray([]) : this.formBuilder.array(
         this.resumeDetail.result.skills.map(
           (item: any) => this.formBuilder.group({
             name: [

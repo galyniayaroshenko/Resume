@@ -1,10 +1,10 @@
-<ul class="list-unstyled interests-list" *ngIf="!languageEditSelfState">
+<ul class="list-unstyled interests-list" *ngIf="!languageEditSelfState && state !== StatesEnum.Create">
     <li *ngFor="let language of languages; let i=index">
         {{language.name}}
         <span class="lang-desc">({{language.level}})</span>
     </li>
 </ul>
-<div class="form-group" *ngIf="languageEditSelfState">
+<div class="form-group" *ngIf="languageEditSelfState || state === StatesEnum.Create">
     <div *ngFor="let language of parentForm.controls.languages.controls; let i=index">
         <span
             class="glyphicon glyphicon-remove pull-right form-group"
