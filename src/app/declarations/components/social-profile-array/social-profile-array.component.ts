@@ -18,7 +18,9 @@ export class SocialProfileArrayComponent {
   ngOnInit(): void {
     this.parentForm.addControl(
       'socialProfiles',
-      this.formBuilder.array(this.socialProfiles.map((item: any) => this.formBuilder.group(item)))
+      this.formBuilder.array(
+        this.socialProfiles.map((item: any) => this.formBuilder.group(item))
+      )
     );
   }
 

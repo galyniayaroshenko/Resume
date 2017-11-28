@@ -127,7 +127,8 @@
                             [education]="resumeDetail.result?.education"
                             [educationEditSelfState]="educationEditSelfState"
                         ></cv-education-array>
-                    </div><!--//education-container-->
+                    </div>
+                    <!--//education-container-->
 
                     <div class="languages-container container-block">
                         <h2 class="container-block-title">Languages</h2>
@@ -187,50 +188,53 @@
                         </div><!--//summary-->
                     </section><!--//section-->
 
-                    <!--<section class="section experience-section">
-                        <h2 class="section-title"><i class="fa fa-briefcase"></i>do</h2>
-                        <cv-edit-button
-                            *ngIf="resumeDetail.state === StatesEnum.Edit"
-                            class="large colorGreen"
-                            (click)="socialProfilesEditSelfState1 = !socialProfilesEditSelfState1"
-                        ></cv-edit-button>
-                        <cv-do
-                            [parentForm]="form"
-                            [socialProfiles]="resumeDetail.result?.social_profiles"
-                            [networkTypes]="networkTypes"
-                            [socialProfilesEditSelfState1]="socialProfilesEditSelfState1"
-                        ></cv-do>
-                    </section>-->
-
-                    <!--<section class="section experience-section">
-                        <h2 class="section-title"><i class="fa fa-briefcase"></i>try</h2>
-                        <cv-edit-button
-                            *ngIf="resumeDetail.state === StatesEnum.Edit"
-                            class="large colorGreen"
-                            (click)="experienceEditSelfState = !experienceEditSelfState"
-                        ></cv-edit-button>
-                        <cv-try
-                            [parentForm]="form"
-                            [experience]="resumeDetail.result?.work_experience"
-                            [experienceEditSelfState]="experienceEditSelfState"
-                        ></cv-try>
-                    </section>-->
-                    <!--//section-->
-
-                    <section class="section experience-section">
+                    <section class="section experiences-section">
                         <h2 class="section-title"><i class="fa fa-briefcase"></i>Experience</h2>
                         <cv-edit-button
                             *ngIf="resumeDetail.state === StatesEnum.Edit"
                             class="large colorGreen"
                             (click)="experienceEditSelfState = !experienceEditSelfState"
+                            [disabled]="form.controls.experience.invalid"
                         ></cv-edit-button>
-                        <cv-experience-array
-                            [parentForm]="form"
-                            [experience]="resumeDetail.result?.work_experience"
-                            [experienceEditSelfState]="experienceEditSelfState"
-                        ></cv-experience-array>
+                        <div *ngIf="!experienceEditSelfState">
+                            <div class="item" *ngFor="let experience of form.value.experience; let i=index">
+                                <div class="meta">
+                                    <div class="upper-row">
+                                        <h3 class="job-title">{{experience.position}}</h3>
+                                        <div class="time">{{experience.startDate}} - {{experience.endDate}}</div>
+                                    </div>
+                                    <div class="company">{{experience.location}}</div>
+                                </div>
+                                <div class="details"><p>{{experience.details}}</p></div>
+                                <div>Website - {{experience.website || 'None'}}</div>
+                                <span>Tools:</span>
+                                <span *ngFor="let tool of (form.value.experience[i].tools || resumeDetail.result.work_experience[i].tools); let i = index">
+                                    {{tool.name || 'None'}},
+                                </span>
+                                <div>Responsibilities - {{experience.responsibilities || 'None'}}</div>
+                            </div>
+                        </div>
+                        <div formArrayName="experience" *ngIf="experienceEditSelfState">
+                            <div *ngFor="let experience of form.controls.experience.controls; let i=index" class="panel panel-default">
+                                <div class="panel-heading">
+                                    <span>Experience {{i + 1}}</span>
+                                    <span class="glyphicon glyphicon-remove pull-right" *ngIf="form.controls.experience.controls.length > 1" (click)="removeExperience(i)"></span>
+                                </div>
+                                <div class="panel-body" [formGroupName]="i">
+                                    <cv-experience
+                                        [group]="form.controls.experience.controls[i]"
+                                        [tools]="resumeDetail.result?.work_experience[i]?.tools"
+                                    ></cv-experience>
+                                </div>
+                            </div>
+                            <div class="margin-20">
+                                <a (click)="addExperience()" style="cursor: default">
+                                    Add another experience +
+                                </a>
+                            </div>
+                        </div>
                     </section>
-                    <!--//section-->
+                    <!--experiences-section-->
 
                     <section class="section projects-section">
                         <h2 class="section-title"><i class="fa fa-archive"></i>Projects</h2>
@@ -238,13 +242,47 @@
                             *ngIf="resumeDetail.state === StatesEnum.Edit"
                             class="large colorGreen"
                             (click)="projectsEditSelfState = !projectsEditSelfState"
+                            [disabled]="form.controls.projects.invalid"
                         ></cv-edit-button>
-                        <cv-project-array
-                            [parentForm]="form"
-                            [projects]="resumeDetail.result?.pet_projects"
-                            [projectsEditSelfState]="projectsEditSelfState"
-                        ></cv-project-array>
-                    </section><!--//section-->
+                        <div *ngIf="!projectsEditSelfState">
+                            <div class="item" *ngFor="let project of form.value.projects; let i=index">
+                                <div class="meta">
+                                    <div class="upper-row">
+                                        <h3 class="job-title">{{project.title}}</h3>
+                                        <h6 class="job-title">{{project.position}}</h6>
+                                        <div class="time">{{project.startDate}} - {{project.endDate}}</div>
+                                    </div>
+                                </div>
+                                <div class="details"><p>{{project.descriptions}}</p></div>
+                                <div>Website - {{project.website || 'None'}}</div>
+                                <span>Tools:</span>
+                                <span *ngFor="let tool of (form.value.projects[i].tools || resumeDetail.result.pet_projects[i].tools); let i = index">
+                                    {{tool.name || 'None'}},
+                                </span>
+                                <div>Type - {{project.type || 'None'}}</div>
+                            </div>
+                        </div>
+                        <div formArrayName="projects" *ngIf="projectsEditSelfState">
+                            <div *ngFor="let project of form.controls.projects.controls; let i=index" class="panel panel-default">
+                                <div class="panel-heading">
+                                    <span>Project {{i + 1}}</span>
+                                    <span class="glyphicon glyphicon-remove pull-right" *ngIf="form.controls.projects.controls.length > 1" (click)="removeProject(i)"></span>
+                                </div>
+                                <div class="panel-body" [formGroupName]="i">
+                                    <cv-project
+                                        [group]="form.controls.projects.controls[i]"
+                                        [tools]="resumeDetail.result?.pet_projects[i]?.tools"
+                                    ></cv-project>
+                                </div>
+                            </div>
+                            <div class="margin-20">
+                                <a (click)="addProject()" style="cursor: default">
+                                    Add another project +
+                                </a>
+                            </div>
+                        </div>
+                    </section>
+                    <!--projects-section-->
 
                     <section class="skills-section section">
                         <h2 class="section-title"><i class="fa fa-rocket"></i>Skills &amp; Proficiency</h2>
@@ -252,13 +290,40 @@
                             *ngIf="resumeDetail.state === StatesEnum.Edit"
                             class="large colorGreen"
                             (click)="skillsEditSelfState = !skillsEditSelfState"
+                            [disabled]="form.controls.skills.invalid"
                         ></cv-edit-button>
-                        <cv-skill-array
-                            [parentForm]="form"
-                            [skills]="resumeDetail.result?.skills"
-                            [skillsEditSelfState]="skillsEditSelfState"
-                        ></cv-skill-array>
-                    </section><!--//skills-section-->
+                        <div *ngIf="!skillsEditSelfState">
+                            <div class="item" *ngFor="let skill of form.value.skills; let i = index">
+                                <span class="project-title"><a href="">{{skill.name}}</a></span> -
+                                <span
+                                    class="project-tagline"
+                                    *ngFor="let tool of (form.value.skills[i].tools || resumeDetail.result.skills[i].tools); let i = index"
+                                >
+                                    {{tool.name}},
+                                </span>
+                            </div>
+                        </div>
+                        <div formArrayName="skills" *ngIf="skillsEditSelfState">
+                            <div *ngFor="let skill of form.controls.skills.controls; let i=index" class="panel panel-default">
+                                <div class="panel-heading">
+                                    <span>Skills {{i + 1}}</span>
+                                    <span class="glyphicon glyphicon-remove pull-right" *ngIf="form.controls.skills.controls.length > 1" (click)="removeSkill(i)"></span>
+                                </div>
+                                <div class="panel-body" [formGroupName]="i">
+                                    <cv-skill
+                                        [group]="form.controls.skills.controls[i]"
+                                        [tools]="resumeDetail.result?.skills[i]?.tools"
+                                    ></cv-skill>
+                                </div>
+                            </div>
+                            <div class="margin-20">
+                                <a (click)="addSkill()" style="cursor: default">
+                                    Add another skill +
+                                </a>
+                            </div>
+                        </div>
+                    </section>
+                    <!--skills-section-->
 
                     <div class="form-group">
                         <button type="button" class="btn" (click)="edit()" *ngIf="resumeDetail.state !== StatesEnum.Edit">Edit</button>

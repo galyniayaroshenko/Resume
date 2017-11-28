@@ -1,42 +1,49 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { Component, Input } from '@angular/core';
+import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 
-const resolvedPromise = Promise.resolve(undefined);
+import { maxLengthValidator, requiredValidator } from '../../../form-validators';
 
 @Component({
   selector: 'cv-project',
-  templateUrl: './project.component.html',
+  templateUrl: 'project.component.html',
 })
+
 export class ProjectComponent {
-  @Input() formArray: FormArray;
-  @Input() project: any;
+  @Input('group') public projectsForm: FormGroup;
+  @Input('tools') public tools: any;
 
-  @Output() removed = new EventEmitter();
-
-  projectGroup: FormGroup;
-  index: number;
-
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    this.projectGroup = this.toFormGroup(this.project);
+    this.tools = this.tools ? this.tools : [];
 
-    resolvedPromise.then(() => {
-      this.index = this.formArray.length;
-      this.formArray.push(this.projectGroup);
+    this.projectsForm.addControl(
+      'tools',
+      this.formBuilder.array(this.tools.map((item: any) => this.formBuilder.group({
+        id: [item.id],
+        name: [item.name, [requiredValidator, maxLengthValidator(80)]]
+      })))
+    );
+  }
+
+  get control(): FormArray {
+    return <FormArray>this.projectsForm.get('tools');
+  };
+
+  initTool() {
+    return this.formBuilder.group({
+      id: [''],
+      name: ['', [requiredValidator, maxLengthValidator(80)]]
     });
   }
 
-  toFormGroup(project: any) {
-    return this.formBuilder.group({
-      id: project.id,
-      title: project.title,
-      position: project.position,
-      type: project.type,
-      startDate: project.startDate,
-      endDate: project.endDate,
-      website: project.website,
-      descriptions: project.descriptions
-    });
+  addTool(): void {
+    const addrCtrl = this.initTool();
+
+    this.control.push(addrCtrl);
+  }
+
+  removeTool(i: number): void {
+    this.control.removeAt(i);
   }
 }

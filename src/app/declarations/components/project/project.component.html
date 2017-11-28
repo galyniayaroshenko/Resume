@@ -1,44 +1,60 @@
 <div class="panel panel-default">
-    <div class="panel-heading">
-        <span>Project {{index + 1}}</span>
-        <span
-            class="glyphicon glyphicon-remove pull-right"
-            *ngIf="formArray.length > 1"
-            (click)="removed.emit()"
-        ></span>
-    </div>
     <div class="panel-body">
-        <div [formGroup]="projectGroup">
+        <div [formGroup]="projectsForm">
             <div class="form-group">
                 <label for="title">Title</label>
                 <input formControlName="title" type="text" class="form-control" id="title">
+                <validation-error [control]="projectsForm.get('title')"></validation-error>
             </div>
             <div class="form-group">
                 <label for="position">Position</label>
                 <input formControlName="position" type="text" class="form-control" id="position">
+                <validation-error [control]="projectsForm.get('position')"></validation-error>
             </div>
             <div class="form-group">
                 <label for="startData">Start data</label>
                 <input formControlName="startDate" type="text" class="form-control" id="startData">
+                <validation-error [control]="projectsForm.get('startDate')"></validation-error>
             </div>
             <div class="form-group">
                 <label for="endDate">End date</label>
                 <input formControlName="endDate" type="text" class="form-control" id="endDate">
+                <validation-error [control]="projectsForm.get('endDate')"></validation-error>
             </div>
             <div class="form-group">
                 <label for="descriptions">Descriptions</label>
                 <textarea formControlName="descriptions" class="form-control" rows="5" id="descriptions"></textarea>
+                <validation-error [control]="projectsForm.get('descriptions')"></validation-error>
             </div>
             <div class="form-group">
                 <label for="link">Website</label>
                 <input formControlName="website" class="form-control" rows="5" id="link"/>
+                <validation-error [control]="projectsForm.get('website')"></validation-error>
             </div>
             <div class="form-group">
                 <label for="type">Type</label>
                 <input formControlName="type" class="form-control" rows="5" id="type"/>
+                <validation-error [control]="projectsForm.get('type')"></validation-error>
             </div>
 
-            <cv-tool-array [parentForm]="projectGroup" [tools]="project?.tools"></cv-tool-array>
+            <div formArrayName="tools">
+                <div *ngFor="let tool of projectsForm.controls.tools.controls; let i=index" class="panel panel-default">
+                    <div class="panel-heading">
+                        <span>Tool {{i + 1}}</span>
+                        <span class="glyphicon glyphicon-remove pull-right" *ngIf="projectsForm.controls.tools.controls.length > 1" (click)="removeTool(i)"></span>
+                    </div>
+                    <div class="panel-body" [formGroupName]="i">
+                        <cv-tool
+                            [group]="projectsForm.controls.tools.controls[i]"
+                        ></cv-tool>
+                    </div>
+                </div>
+            </div>
+            <div class="margin-20">
+                <a (click)="addTool()" style="cursor: default">
+                    Add another tool +
+                </a>
+            </div>
         </div>
     </div>
 </div>

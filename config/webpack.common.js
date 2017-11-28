@@ -48,7 +48,6 @@ module.exports = {
         exclude: /node_modules/,
         use: ['raw-loader', 'sass-loader']
       },
-
       {
         test: /\.css$/,
         exclude: helpers.root('src', 'app'),

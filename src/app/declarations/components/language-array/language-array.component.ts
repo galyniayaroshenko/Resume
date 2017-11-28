@@ -15,7 +15,12 @@ export class LanguageArrayComponent {
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
-    this.parentForm.addControl('languages', this.formBuilder.array(this.languages.map((item: any) => this.formBuilder.group(item))));
+    this.parentForm.addControl(
+      'languages',
+      this.formBuilder.array(
+        this.languages.map((item: any) => this.formBuilder.group(item))
+      )
+    );
   }
 
   get arrLanguage(): FormArray {

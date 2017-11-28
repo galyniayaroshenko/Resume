@@ -8,36 +8,40 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 })
 
 export class EducationArrayComponent {
-    @Input('parentForm') parentForm: FormGroup;
-    @Input('educationEditSelfState') educationEditSelfState: Boolean;
-    @Input('education') education: any;
+  @Input('parentForm') parentForm: FormGroup;
+  @Input('educationEditSelfState') educationEditSelfState: Boolean;
+  @Input('education') education: any;
 
-    constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder) {}
 
-    ngOnInit(): void {
-      this.parentForm.addControl('education', this.formBuilder.array(this.education.map((item: any) => this.formBuilder.group(item))));
-    }
+  ngOnInit(): void {
+    this.parentForm.addControl(
+      'education',
+      this.formBuilder.array(
+        this.education.map((item: any) => this.formBuilder.group(item))
+      )
+    );
+  }
 
-    get arrEducation(): FormArray {
-      return this.parentForm.get('education') as FormArray;
-    };
+  get arrEducation(): FormArray {
+    return this.parentForm.get('education') as FormArray;
+  };
 
-    initEducation() {
-      return this.formBuilder.group({
-        level_qualifications: '',
-        school: '',
-        startDate: '',
-        endDate: '',
-        area: ''
-      });
-    }
+  initEducation() {
+    return this.formBuilder.group({
+      level_qualifications: '',
+      school: '',
+      startDate: '',
+      endDate: '',
+      area: ''
+    });
+  }
 
-    addEducation(): void {
-      this.educationEditSelfState = true;
-      this.arrEducation.push(this.initEducation());
-    }
+  addEducation(): void {
+    this.arrEducation.push(this.initEducation());
+  }
 
-    removeEducation(index: number): void {
-      this.arrEducation.removeAt(index);
-    }
+  removeEducation(index: number): void {
+    this.arrEducation.removeAt(index);
+  }
 }

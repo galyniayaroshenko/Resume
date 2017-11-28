@@ -19,6 +19,7 @@ export class LevelBarComponent implements OnInit {
 
   ngOnInit(): void {
     const levelBarInner = this.element.nativeElement.querySelector('.level-bar-inner');
+
     this.renderer.setStyle(levelBarInner, 'width', `${this.dataLevel + '%'}`);
   }
 }

@@ -1,36 +1,49 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { Component, Input } from '@angular/core';
+import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 
-const resolvedPromise = Promise.resolve(undefined);
+import { maxLengthValidator, requiredValidator } from '../../../form-validators';
 
 @Component({
   selector: 'cv-skill',
-  templateUrl: './skill.component.html',
+  templateUrl: 'skill.component.html',
 })
+
 export class SkillComponent {
-  @Input() formArray: FormArray;
-  @Input() skill: any;
-
-  @Output() removed = new EventEmitter();
-
-  skillGroup: FormGroup;
-  index: number;
+  @Input('group') public skillForm: FormGroup;
+  @Input('tools') public tools: any;
 
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
-      this.skillGroup = this.toFormGroup(this.skill);
+    this.tools = this.tools ? this.tools : [];
 
-      resolvedPromise.then(() => {
-          this.index = this.formArray.length;
-          this.formArray.push(this.skillGroup);
-      });
+    this.skillForm.addControl(
+      'tools',
+      this.formBuilder.array(this.tools.map((item: any) => this.formBuilder.group({
+        id: [item.id],
+        name: [item.name, [requiredValidator, maxLengthValidator(80)]]
+      })))
+    );
   }
 
-  toFormGroup(skill: any) {
-      return this.formBuilder.group({
-          id: skill.id,
-          name: skill.name
-      });
+  get control(): FormArray {
+    return <FormArray>this.skillForm.get('tools');
+  };
+
+  initTool() {
+    return this.formBuilder.group({
+      id: [''],
+      name: ['', [requiredValidator, maxLengthValidator(80)]]
+    });
+  }
+
+  addTool(): void {
+    const addrCtrl = this.initTool();
+
+    this.control.push(addrCtrl);
+  }
+
+  removeTool(i: number): void {
+    this.control.removeAt(i);
   }
 }

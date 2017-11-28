@@ -16,7 +16,12 @@ export class PhoneArrayComponent {
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
-    this.parentForm.addControl('phoneNumber', this.formBuilder.array(this.phoneNumbers.map((item: any) => this.formBuilder.group(item))));
+    this.parentForm.addControl(
+      'phoneNumber',
+      this.formBuilder.array(
+        this.phoneNumbers.map((item: any) => this.formBuilder.group(item))
+      )
+    );
   }
 
   get phones(): FormArray {

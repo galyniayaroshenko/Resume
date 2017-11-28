@@ -1,19 +1,30 @@
 <div class="panel panel-default">
-    <div class="panel-heading">
-        <span>Skill {{index + 1}}</span>
-        <span
-            class="glyphicon glyphicon-remove pull-right"
-            *ngIf="formArray.length > 1"
-            (click)="removed.emit()"
-        ></span>
-    </div>
     <div class="panel-body">
-        <div [formGroup]="skillGroup">
+        <div [formGroup]="skillForm">
             <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control" formControlName="name">
+                <label for="name">Name</label>
+                <input formControlName="name" type="text" class="form-control" id="name">
+                <validation-error [control]="skillForm.get('name')"></validation-error>
             </div>
-            <cv-tool-array [parentForm]="skillGroup" [tools]="skill?.tools"></cv-tool-array>
+
+            <div formArrayName="tools">
+                <div *ngFor="let tool of skillForm.controls.tools.controls; let i=index" class="panel panel-default">
+                    <div class="panel-heading">
+                        <span>Tool {{i + 1}}</span>
+                        <span class="glyphicon glyphicon-remove pull-right" *ngIf="skillForm.controls.tools.controls.length > 1" (click)="removeTool(i)"></span>
+                    </div>
+                    <div class="panel-body" [formGroupName]="i">
+                        <cv-tool
+                            [group]="skillForm.controls.tools.controls[i]"
+                        ></cv-tool>
+                    </div>
+                </div>
+            </div>
+            <div class="margin-20">
+                <a (click)="addTool()" style="cursor: default">
+                    Add another tool +
+                </a>
+            </div>
         </div>
     </div>
 </div>

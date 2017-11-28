@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { AbstractControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -35,7 +35,7 @@ export class ResumeDetailView {
   @ViewChild('mainWrapperToPdf') mainWrapperToPdf: ElementRef;
   @ViewChild('sidebarWrapperToPdf') sidebarWrapperToPdf: ElementRef;
 
-    /* hooks */
+  /* hooks */
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(data => {
        this.resumeDetail = data['resumeDetail'];
@@ -49,6 +49,18 @@ export class ResumeDetailView {
 
     this.formBuild();
   }
+
+  get experienceControl(): FormArray {
+    return <FormArray>this.form.get('experience');
+  };
+
+  get projectsControl(): FormArray {
+    return <FormArray>this.form.get('projects');
+  };
+
+  get skillControl(): FormArray {
+    return <FormArray>this.form.get('skills');
+  };
 
   edit(): void {
     this.resumeDetail.edit();
@@ -126,7 +138,122 @@ export class ResumeDetailView {
       profile: [
         this.resumeDetail.result.profile,
         [requiredValidator, minLengthValidator(10), maxLengthValidator(350)]
-      ]
+      ],
+      experience: this.formBuilder.array(
+        this.resumeDetail.result.work_experience.map(
+          (item: any) => this.formBuilder.group({
+            position: [
+              item.position,
+              [requiredValidator, maxLengthValidator(20)]
+            ],
+            startDate: [item.startDate, requiredValidator],
+            endDate: [item.endDate, requiredValidator],
+            company: [
+              item.company,
+              [requiredValidator, maxLengthValidator(50)]
+            ],
+            details: [
+              item.details,
+              [requiredValidator, minLengthValidator(50), maxLengthValidator(250)]
+            ],
+            website: [
+              item.website,
+              [requiredValidator, maxLengthValidator(50)]
+            ],
+            responsibilities: [item.responsibilities, requiredValidator]
+          })
+        )
+      ),
+      projects: this.formBuilder.array(
+        this.resumeDetail.result.pet_projects.map(
+          (item: any) => this.formBuilder.group({
+            title: [
+              item.title,
+              [requiredValidator, maxLengthValidator(20)]
+            ],
+            position: [
+              item.position,
+              [requiredValidator, maxLengthValidator(50)]
+            ],
+            type: [
+              item.type,
+              [requiredValidator, maxLengthValidator(30)]
+            ],
+            startDate: [item.startDate, requiredValidator],
+            endDate: [item.endDate, requiredValidator],
+            website: [
+              item.website,
+              [requiredValidator, maxLengthValidator(50)]
+            ],
+            descriptions: [
+              item.descriptions,
+              [requiredValidator, minLengthValidator(50), maxLengthValidator(250)]
+            ]
+          })
+        )
+      ),
+      skills: this.formBuilder.array(
+        this.resumeDetail.result.skills.map(
+          (item: any) => this.formBuilder.group({
+            name: [
+              item.name,
+              [requiredValidator, maxLengthValidator(60)]
+            ]
+          })
+        )
+      )
     });
+  }
+
+  initExperience() {
+    return this.formBuilder.group({
+      position: ['', [requiredValidator, maxLengthValidator(20)]],
+      startDate: ['', requiredValidator],
+      endDate: ['', requiredValidator],
+      company: ['', [requiredValidator, maxLengthValidator(50)]],
+      details: ['', [requiredValidator, minLengthValidator(50), maxLengthValidator(250)]],
+      website: ['', [requiredValidator, maxLengthValidator(50)]],
+      responsibilities: ['', requiredValidator]
+    });
+  }
+
+  addExperience(): void {
+    this.experienceControl.push(this.initExperience());
+  }
+
+  removeExperience(index: number): void {
+    this.experienceControl.removeAt(index);
+  }
+
+  initProject() {
+    return this.formBuilder.group({
+      title: ['', [requiredValidator, maxLengthValidator(20)]],
+      position: ['', [requiredValidator, maxLengthValidator(50)]],
+      type: ['', [requiredValidator, maxLengthValidator(30)]],
+      startDate: ['', requiredValidator],
+      endDate: ['', requiredValidator],
+      website: ['', [requiredValidator, maxLengthValidator(50)]],
+      descriptions: ['', [requiredValidator, minLengthValidator(50), maxLengthValidator(250)]]
+    });
+  }
+
+  addProject(): void {
+    this.projectsControl.push(this.initProject());
+  }
+
+  removeProject(index: number): void {
+    this.projectsControl.removeAt(index);
+  }
+
+  addSkill(): void {
+    this.skillControl.push(
+      this.formBuilder.group({
+        name: ['', [requiredValidator, maxLengthValidator(60)]]
+      })
+    );
+  }
+
+  removeSkill(index: number) {
+    this.skillControl.removeAt(index);
   }
 }

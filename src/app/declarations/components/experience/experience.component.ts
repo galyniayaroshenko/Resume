@@ -1,49 +1,49 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { Component, Input } from '@angular/core';
+import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 
-const resolvedPromise = Promise.resolve(undefined);
+import { maxLengthValidator, requiredValidator } from '../../../form-validators';
 
 @Component({
   selector: 'cv-experience',
-  templateUrl: './experience.component.html',
+  templateUrl: 'experience.component.html',
 })
+
 export class ExperienceComponent {
-  @Input() formArray: FormArray;
-  @Input() experience: any;
+  @Input('group') public experienceForm: FormGroup;
+  @Input('tools') public tools: any;
 
-  @Output() removed = new EventEmitter();
-
-  experienceGroup: FormGroup;
-  index: number;
-
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    this.experienceGroup = this.toFormGroup(this.experience);
+    this.tools = this.tools ? this.tools : [];
 
-    resolvedPromise.then(() => {
-      this.index = this.formArray.length;
+    this.experienceForm.addControl(
+      'tools',
+      this.formBuilder.array(this.tools.map((item: any) => this.formBuilder.group({
+        id: [item.id],
+        name: [item.name, [requiredValidator, maxLengthValidator(80)]]
+      })))
+    );
+  }
 
-      // this.formArray.value.map((item: any) => {
-      //   console.log('item', item);
-      // });
+  get control(): FormArray {
+    return <FormArray>this.experienceForm.get('tools');
+  };
 
-      // if (this.index <= 0) {
-        this.formArray.push(this.experienceGroup);
-      // }
+  initTool() {
+    return this.formBuilder.group({
+      id: [''],
+      name: ['', [requiredValidator, maxLengthValidator(80)]]
     });
   }
 
-  toFormGroup(experience: any) {
-    return this.formBuilder.group({
-      id: experience.id,
-      position: experience.position,
-      startDate: experience.startDate,
-      endDate: experience.endDate,
-      company: experience.company,
-      details: experience.details,
-      website: experience.website,
-      responsibilities: experience.responsibilities
-    });
+  addTool(): void {
+    const addrCtrl = this.initTool();
+
+    this.control.push(addrCtrl);
+  }
+
+  removeTool(i: number): void {
+    this.control.removeAt(i);
   }
 }

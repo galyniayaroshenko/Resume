@@ -15,7 +15,12 @@ export class InterestArrayComponent {
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
-    this.parentForm.addControl('interests', this.formBuilder.array(this.interests.map((item: any) => this.formBuilder.group(item))));
+    this.parentForm.addControl(
+      'interests',
+      this.formBuilder.array(
+        this.interests.map((item: any) => this.formBuilder.group(item))
+      )
+    );
   }
 
   get arrInterests(): FormArray {
