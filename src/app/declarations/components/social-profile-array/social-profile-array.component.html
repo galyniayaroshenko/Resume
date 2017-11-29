@@ -23,6 +23,7 @@
                 tooltipPosition="top"
             />
         </div>
+        <validation-error [control]="parentForm.controls.socialProfiles.controls[i].get('url')"></validation-error>
         <div class="form-group">
             <select
                 class="form-control custom-control large"
@@ -32,8 +33,8 @@
             >
                 <option *ngFor="let networkType of networkTypes" [value]="networkType">{{networkType}}</option>
             </select>
+            <validation-error [control]="parentForm.controls.socialProfiles.controls[i].get('network')"></validation-error>
         </div>
     </div>
     <button (click)="addSocialProfiles()" class="btn btn-default">Add another phone + </button>
 </div>
-<!--<pre>{{ parentForm.value.socialProfiles | json }}</pre>-->

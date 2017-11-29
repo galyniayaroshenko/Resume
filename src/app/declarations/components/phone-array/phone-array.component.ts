@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup  } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 
 import { maxLengthValidator, requiredValidator } from '../../../form-validators';
 
@@ -44,10 +44,8 @@ export class PhoneArrayComponent {
 
   initPhone() {
     return this.formBuilder.group({
-      // type: ['', requiredValidator],
-      // number: ['', [requiredValidator, maxLengthValidator(30)]],
-      type: '',
-      number: ''
+      type: ['', requiredValidator],
+      number: ['', [requiredValidator, maxLengthValidator(30)]]
     });
   }
 

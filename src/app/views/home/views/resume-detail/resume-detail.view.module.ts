@@ -11,6 +11,7 @@ import { HighlightDirective } from '../../../../declarations/directives/highligh
 import { InterestArrayComponent } from '../../../../declarations/components/interest-array';
 import { LanguageArrayComponent } from '../../../../declarations/components/language-array';
 import { LevelBarComponent } from '../../../../declarations/components/level-bar';
+import { MessageInlineComponent } from '../../../../declarations/components/message-inline';
 import { PhoneArrayComponent } from '../../../../declarations/components/phone-array';
 import { ProjectComponent } from '../../../../declarations/components/project';
 import { SkillComponent } from '../../../../declarations/components/skill';
@@ -34,6 +35,7 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
     InterestArrayComponent,
     LanguageArrayComponent,
     LevelBarComponent,
+    MessageInlineComponent,
     PhoneArrayComponent,
     ProjectComponent,
     SkillComponent,

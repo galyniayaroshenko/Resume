@@ -22,7 +22,7 @@
                 pTooltip="Enter phone"
                 tooltipPosition="top"
             />
-            <!--<validation-error [control]="parentForm.get('number')"></validation-error>-->
+            <validation-error [control]="parentForm.controls.phoneNumber.controls[i].get('number')"></validation-error>
         </div>
         <div class="form-group">
             <select
@@ -33,7 +33,7 @@
             >
                 <option *ngFor="let phoneType of phoneTypes" [value]="phoneType">{{phoneType}}</option>
             </select>
-            <!--<validation-error [control]="parentForm.get('type')"></validation-error>-->
+            <validation-error [control]="parentForm.controls.phoneNumber.controls[i].get('type')"></validation-error>
         </div>
     </div>
     <button (click)="addPhone()" class="btn btn-default">Add another phone + </button>

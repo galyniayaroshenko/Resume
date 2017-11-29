@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 
+import { maxLengthValidator, requiredValidator } from '../../../form-validators';
+
 import { StatesEnum } from '../../../models/resume';
 
 @Component({
@@ -24,7 +26,10 @@ export class SocialProfileArrayComponent {
     this.parentForm.addControl(
       'socialProfiles',
       (!this.socialProfiles ? new FormArray([]) : this.formBuilder.array(
-        this.socialProfiles.map((item: any) => this.formBuilder.group(item))
+        this.socialProfiles.map((item: any) => this.formBuilder.group({
+          url: [item.url, [requiredValidator, maxLengthValidator(50)]],
+          network: [item.network, requiredValidator]
+        }))
       ))
     );
 
@@ -39,8 +44,8 @@ export class SocialProfileArrayComponent {
 
   initSocialProfiles() {
     return this.formBuilder.group({
-      url: '',
-      network: ''
+      url: ['', [requiredValidator, maxLengthValidator(50)]],
+      network: ['', requiredValidator]
     });
   }
 

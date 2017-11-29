@@ -1,78 +1,76 @@
-<!--<div class="container padding">-->
 <div class="wrapper">
   <perfect-scrollbar>
-      <p-dataTable
-          [value]="resumeList"
-          [rows]="2"
-          [pageLinks]="4"
-          [rowsPerPageOptions]="[2,10,20]"
-          resizableColumns="true"
-          (onRowClick)="resumeDetailLoad($event)"
-        >
-          <!--[paginator]="true"-->
-          <p-column field="name" header="Name" [style]="{'width':'150px'}"></p-column>
-          <p-column field="position" header="Position" [sortable]="true" [style]="{'width':'150px'}"></p-column>
-          <p-column field="skype" header="Skype" [style]="{'width':'100px'}"></p-column>
-          <p-column field="email" header="Email" [style]="{'width':'200px'}"></p-column>
-          <p-column field="phoneNumbers" header="Phone Numbers" [style]="{'width':'200px'}">
-            <template let-items="rowData" pTemplate="body">
-              <div *ngFor="let item of items.phoneNumbers">
-                {{item.type}} - {{item.number}}
-              </div>
-            </template>
-          </p-column>
-          <p-column field="social_profiles" header="Social profiles" [style]="{'width':'250px'}">
-            <template let-items="rowData" pTemplate="body">
-              <div *ngFor="let item of items.social_profiles">
-                {{item.network}} - {{item.url}}
-              </div>
-            </template>
-          </p-column>
-          <!--<p-column field="profile" header="Profile"></p-column>-->
-          <!--<p-column field="education" header="Education">
-            <template let-items="rowData" pTemplate="body">
-              <div *ngFor="let item of items.education">
-                {{item.school}} - {{ item.area }}
-              </div>
-            </template>
-          </p-column>-->
-          <p-column field="languages" header="Languages" [style]="{'width':'200px'}">
-            <template let-items="rowData" pTemplate="body">
-              <div *ngFor="let item of items.languages">
-                {{item.name}} - {{item.level}}
-              </div>
-            </template>
-          </p-column>
-          <!--<p-column field="work_experience" header="Experiences">
-            <template let-items="rowData" pTemplate="body">
-              <div *ngFor="let item of items.work_experience">
-                {{item.position}} ({{item.startDate}} - {{item.endDate}})
-              </div>
-            </template>
-          </p-column>-->
-          <!--<p-column field="pet_projects" header="Projects">
-            <template let-items="rowData" pTemplate="body">
-              <div *ngFor="let item of items.pet_projects">
-                {{item.title}} ({{item.startDate}} - {{item.endDate}})
-              </div>
-            </template>
-          </p-column>-->
-          <p-column field="skills" header="Skills" [style]="{'width':'400px'}">
-            <template let-items="rowData" pTemplate="body">
-              <div *ngFor="let item of items.skills">
-                {{item.name}} - <span *ngFor="let some of item.tools">{{some.name}}, </span>
-              </div>
-            </template>
-          </p-column>
-          <!--<p-column field="interests" header="Interests">
-            <template let-items="rowData" pTemplate="body">
-              <div *ngFor="let item of items.interests">
-                {{item.name}}
-              </div>
-            </template>
-          </p-column>-->
-      </p-dataTable>
+    <p-dataTable
+      [value]="resumeList"
+      [rows]="2"
+      [pageLinks]="4"
+      [rowsPerPageOptions]="[2,10,20]"
+      resizableColumns="true"
+      (onRowClick)="resumeDetailLoad($event)"
+    >
+    <!--[paginator]="true"-->
+      <p-column field="name" header="Name" [style]="{'width':'150px'}"></p-column>
+      <p-column field="position" header="Position" [sortable]="true" [style]="{'width':'150px'}"></p-column>
+      <p-column field="skype" header="Skype" [style]="{'width':'100px'}"></p-column>
+      <p-column field="email" header="Email" [style]="{'width':'200px'}"></p-column>
+      <p-column field="phoneNumbers" header="Phone Numbers" [style]="{'width':'200px'}">
+        <template let-items="rowData" pTemplate="body">
+          <div *ngFor="let item of items.phoneNumbers">
+            {{item.type}} - {{item.number}}
+          </div>
+        </template>
+      </p-column>
+      <p-column field="social_profiles" header="Social profiles" [style]="{'width':'250px'}">
+        <template let-items="rowData" pTemplate="body">
+          <div *ngFor="let item of items.social_profiles">
+            {{item.network}} - {{item.url}}
+          </div>
+        </template>
+      </p-column>
+      <!--<p-column field="profile" header="Profile"></p-column>-->
+      <!--<p-column field="education" header="Education">
+        <template let-items="rowData" pTemplate="body">
+          <div *ngFor="let item of items.education">
+            {{item.school}} - {{ item.area }}
+          </div>
+        </template>
+      </p-column>-->
+      <p-column field="languages" header="Languages" [style]="{'width':'200px'}">
+        <template let-items="rowData" pTemplate="body">
+          <div *ngFor="let item of items.languages">
+            {{item.name}} - {{item.level}}
+          </div>
+        </template>
+      </p-column>
+      <!--<p-column field="work_experience" header="Experiences">
+        <template let-items="rowData" pTemplate="body">
+          <div *ngFor="let item of items.work_experience">
+            {{item.position}} ({{item.startDate}} - {{item.endDate}})
+          </div>
+        </template>
+      </p-column>-->
+      <!--<p-column field="pet_projects" header="Projects">
+      <template let-items="rowData" pTemplate="body">
+        <div *ngFor="let item of items.pet_projects">
+          {{item.title}} ({{item.startDate}} - {{item.endDate}})
+        </div>
+      </template>
+      </p-column>-->
+      <p-column field="skills" header="Skills" [style]="{'width':'400px'}">
+        <template let-items="rowData" pTemplate="body">
+          <div *ngFor="let item of items.skills">
+            {{item.name}} - <span *ngFor="let some of item.tools">{{some.name}}, </span>
+          </div>
+        </template>
+      </p-column>
+      <!--<p-column field="interests" header="Interests">
+        <template let-items="rowData" pTemplate="body">
+          <div *ngFor="let item of items.interests">
+            {{item.name}}
+          </div>
+        </template>
+      </p-column>-->
+    </p-dataTable>
   </perfect-scrollbar>
 </div>
 <button type="button" class="btn" (click)="create()">Create resume</button>
-<!--</div>-->

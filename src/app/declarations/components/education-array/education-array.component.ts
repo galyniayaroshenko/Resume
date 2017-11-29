@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 
+import { maxLengthValidator, requiredValidator } from '../../../form-validators';
+
 import { StatesEnum } from '../../../models/resume';
 
 @Component({
@@ -10,12 +12,12 @@ import { StatesEnum } from '../../../models/resume';
 })
 
 export class EducationArrayComponent {
+  StatesEnum = StatesEnum;
+
   @Input('parentForm') parentForm: FormGroup;
   @Input('educationEditSelfState') educationEditSelfState: Boolean;
   @Input('education') education: any;
   @Input('state') state: any;
-
-  StatesEnum = StatesEnum;
 
   constructor(private formBuilder: FormBuilder) {}
 
@@ -23,7 +25,22 @@ export class EducationArrayComponent {
     this.parentForm.addControl(
       'education',
       (!this.education ? new FormArray([]) : this.formBuilder.array(
-        this.education.map((item: any) => this.formBuilder.group(item))
+        this.education.map((item: any) => this.formBuilder.group({
+          level_qualifications: [
+            item.level_qualifications,
+            [requiredValidator, maxLengthValidator(50)]
+          ],
+          school: [
+            item.school,
+            [requiredValidator, maxLengthValidator(50)]
+          ],
+          startDate: [item.startDate, requiredValidator],
+          endDate: [item.endDate, requiredValidator],
+          area: [
+            item.area,
+            [requiredValidator, maxLengthValidator(80)]
+          ]
+        }))
       ))
     );
 
@@ -38,11 +55,11 @@ export class EducationArrayComponent {
 
   initEducation() {
     return this.formBuilder.group({
-      level_qualifications: '',
-      school: '',
-      startDate: '',
-      endDate: '',
-      area: ''
+      level_qualifications: ['', [requiredValidator, maxLengthValidator(50)]],
+      school: ['', [requiredValidator, maxLengthValidator(50)]],
+      startDate: ['', requiredValidator],
+      endDate: ['', requiredValidator],
+      area: ['', [requiredValidator, maxLengthValidator(80)]]
     });
   }
 

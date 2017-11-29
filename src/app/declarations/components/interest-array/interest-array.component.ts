@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 
+import { maxLengthValidator, requiredValidator } from '../../../form-validators';
+
 import { StatesEnum } from '../../../models/resume';
 
 @Component({
@@ -23,7 +25,9 @@ export class InterestArrayComponent {
     this.parentForm.addControl(
       'interests',
       (!this.interests ? new FormArray([]) : this.formBuilder.array(
-        this.interests.map((item: any) => this.formBuilder.group(item))
+        this.interests.map((item: any) => this.formBuilder.group({
+          name: [item.name, [requiredValidator, maxLengthValidator(50)]]
+        }))
       ))
     );
 
@@ -38,7 +42,7 @@ export class InterestArrayComponent {
 
   initInterests() {
     return this.formBuilder.group({
-      name: ''
+      name: ['', [requiredValidator, maxLengthValidator(50)]]
     });
   }
 

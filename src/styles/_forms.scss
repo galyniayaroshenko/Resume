@@ -1,0 +1,26 @@
+input, textarea, select {
+  &.ng-invalid {
+    /* STATES */
+    & /*default*/ {
+      border-color: #E95252;
+    }
+    &:hover {
+      border-color: #E95252;
+    }
+    &:focus {
+      box-shadow: 0 0 0 2px #FFBDBD, 0 1px 3px 0 rgba(0, 0, 0, 0.5) inset;
+    }
+  }
+  &.ng-pristine {
+    /* STATES */
+    & /*default*/ {
+      border-color: #ccc;
+    }
+    &:hover {
+      border-color: #ccc;
+    }
+    &:focus {
+      box-shadow: 0 0 0 1px #ccc, 0 1px 1px 0 rgba(0, 0, 0, 0.5) inset;
+    }
+  }
+}

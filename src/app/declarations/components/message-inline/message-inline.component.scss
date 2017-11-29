@@ -1,0 +1,34 @@
+:host:not([hidden]) {
+  display: block;
+  margin: 50px 50px 50px 0px;
+  border: 1px solid black;
+  border-radius: 2px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+
+  &.danger {
+    background-color: #FFE8E8;
+    border-color: #FFC1C1;
+  }
+  &.info {
+    background-color: #D9F3FF;
+    border-color: #6ACEFA;
+  }
+  &.warning {
+    background-color: #F9EDBE;
+    border-color: #F0C36D;
+  }
+}
+.message {
+  align-self: center;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  margin: 16px;
+}
+.btn {
+  &:hover {
+    background-color: rgba(255, 255, 255, 1);
+  }
+}

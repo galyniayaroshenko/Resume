@@ -21,6 +21,7 @@
                     pTooltip="Enter level_qualifications"
                     tooltipPosition="top"
                 />
+                <validation-error [control]="parentForm.controls.education.controls[i].get('level_qualifications')"></validation-error>
             </div>
             <div class="form-group">
                 <input
@@ -30,6 +31,7 @@
                     pTooltip="Enter school"
                     tooltipPosition="top"
                 />
+                <validation-error [control]="parentForm.controls.education.controls[i].get('school')"></validation-error>
             </div>
             <div class="form-group">
                 <input
@@ -39,6 +41,7 @@
                     pTooltip="Enter startDate"
                     tooltipPosition="top"
                 />
+                <validation-error [control]="parentForm.controls.education.controls[i].get('startDate')"></validation-error>
             </div>
             <div class="form-group">
                 <input
@@ -48,6 +51,7 @@
                     pTooltip="Enter endDate"
                     tooltipPosition="top"
                 />
+                <validation-error [control]="parentForm.controls.education.controls[i].get('endDate')"></validation-error>
             </div>
             <div class="form-group">
                 <input
@@ -57,6 +61,7 @@
                     pTooltip="Enter area"
                     tooltipPosition="top"
                 />
+                <validation-error [control]="parentForm.controls.education.controls[i].get('area')"></validation-error>
             </div>
         </div>
     </div>

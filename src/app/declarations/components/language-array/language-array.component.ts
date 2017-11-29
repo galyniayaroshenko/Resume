@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 
+import { maxLengthValidator, requiredValidator } from '../../../form-validators';
+
 import { StatesEnum } from '../../../models/resume';
 
 @Component({
@@ -23,7 +25,10 @@ export class LanguageArrayComponent {
     this.parentForm.addControl(
       'languages',
       (!this.languages ? new FormArray([]) : this.formBuilder.array(
-        this.languages.map((item: any) => this.formBuilder.group(item))
+        this.languages.map((item: any) => this.formBuilder.group({
+          name: [item.name, [requiredValidator, maxLengthValidator(20)]],
+          level: [item.level, requiredValidator]
+        }))
       ))
     );
 
@@ -38,8 +43,8 @@ export class LanguageArrayComponent {
 
   initLanguage() {
     return this.formBuilder.group({
-      name: '',
-      level: ''
+      name: ['', [requiredValidator, maxLengthValidator(20)]],
+      level: ['', requiredValidator]
     });
   }
 

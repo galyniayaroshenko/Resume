@@ -27,6 +27,8 @@ export class ResumeDetailView {
   // resumeDetail: IResumeModel;
   resumeDetail: any;
 
+  error: String;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
@@ -40,11 +42,10 @@ export class ResumeDetailView {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(data => {
        this.resumeDetail = data['resumeDetail'];
-       console.log('this.resumeDetail!', this.resumeDetail);
-       console.log('etalon', this.resumeDetail.etalon);
-       console.log('etalon', this.resumeDetail.etalon.name);
-        console.log('this.resumeDetail.result.name', this.resumeDetail.result);
+        console.log('this.resumeDetail.result', this.resumeDetail.result);
     });
+
+    this.error = '!qwerty';
 
     this.phoneTypes = ['phone', 'mobile'];
     this.networkTypes = ['linkedin', 'github', 'twitter'];
@@ -120,10 +121,23 @@ export class ResumeDetailView {
 
   save(): void {
     console.log('this.form', this.form.value);
-    console.log('this.form.value.name', this.form.value.name);
-    let json = this.form.value;
 
-    this.resumeDetail.save(json);
+    this.resumeDetail.save(this.form.value)
+      .OK('OK')(() => {
+        this.router
+          .navigate(['cv/resume-list'])
+          .then(() => {
+            this.error = '';
+          });
+      })
+      .OK('ERROR:target')((error: any) => {
+        console.log('errors target', error);
+        this.error = error;
+      })
+      .OK('ERROR:general')((error: any) => {
+        console.log('errors general', error);
+        this.error = error;
+      });
   }
 
   /* private methods */
