@@ -10,13 +10,6 @@
   position: relative;
 }
 
-.text-truncate {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 160px;
-}
-
 .sidebar-wrapper {
   background: $theme-color;
   color: #fff;
@@ -44,6 +37,7 @@
     font-weight: 900;
     margin-bottom: 10px;
     margin-top: 0;
+    white-space: pre-line;
   }
   .tagline {
     color: rgba(256, 256, 256, 0.6);
@@ -310,7 +304,7 @@
     perfect-scrollbar {
       height: auto;
         & >.ps {
-          height: 1094px;
+          height: 1087px;
         }
     }
 

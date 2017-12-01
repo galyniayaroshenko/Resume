@@ -29,3 +29,11 @@ a {
 p {
   line-height: 1.5;
 }
+
+.text-truncate {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 184px;
+}

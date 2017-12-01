@@ -1,40 +1,42 @@
 <ul *ngIf="!socialProfilesEditSelfState && state !== StatesEnum.Create" class="list-unstyled interests-list">
-    <li *ngFor="let socialProfile of parentForm.value.socialProfiles; let i=index">
-        <i class="fa fa-{{socialProfile.network}}"></i>
-        <a href="tel:{{socialProfile.url}}" class="text-truncate">{{socialProfile.url}}</a>
-    </li>
+  <li *ngFor="let socialProfile of parentForm.value.socialProfiles; let i=index">
+    <a href="tel:{{socialProfile.url}}" class="text-truncate">
+      <i class="fa fa-{{socialProfile.network}}"></i>
+      {{socialProfile.url}}
+    </a>
+  </li>
 </ul>
 <div *ngIf="socialProfilesEditSelfState || state === StatesEnum.Create">
-    <div
-        *ngFor="let socialProfile of parentForm.controls.socialProfiles.controls; let i=index"
-        [formGroup]="parentForm.controls.socialProfiles.controls[i]"
-    >
-        <span
-            class="glyphicon glyphicon-remove pull-right form-group"
-            *ngIf="parentForm.controls.socialProfiles.controls.length > 1"
-            (click)="removeSocialProfiles(i)"
-        ></span>
-        <div class="form-group">
-            <input
-                formControlName="url"
-                type="text"
-                class="form-control custom-control large"
-                pTooltip="Enter url"
-                tooltipPosition="top"
-            />
-        </div>
-        <validation-error [control]="parentForm.controls.socialProfiles.controls[i].get('url')"></validation-error>
-        <div class="form-group">
-            <select
-                class="form-control custom-control large"
-                formControlName="network"
-                pTooltip="Select type network"
-                tooltipPosition="top"
-            >
-                <option *ngFor="let networkType of networkTypes" [value]="networkType">{{networkType}}</option>
-            </select>
-            <validation-error [control]="parentForm.controls.socialProfiles.controls[i].get('network')"></validation-error>
-        </div>
+  <div
+    *ngFor="let socialProfile of parentForm.controls.socialProfiles.controls; let i=index"
+    [formGroup]="parentForm.controls.socialProfiles.controls[i]"
+  >
+    <span
+      class="glyphicon glyphicon-remove pull-right form-group"
+      *ngIf="parentForm.controls.socialProfiles.controls.length > 1"
+      (click)="removeSocialProfiles(i)"
+    ></span>
+    <div class="form-group">
+      <input
+        formControlName="url"
+        type="text"
+        class="form-control custom-control large"
+        pTooltip="Enter url"
+        tooltipPosition="top"
+      />
     </div>
-    <button (click)="addSocialProfiles()" class="btn btn-default">Add another phone + </button>
+    <validation-error [control]="parentForm.controls.socialProfiles.controls[i].get('url')"></validation-error>
+    <div class="form-group">
+      <select
+        class="form-control custom-control large"
+        formControlName="network"
+        pTooltip="Select type network"
+        tooltipPosition="top"
+      >
+        <option *ngFor="let networkType of networkTypes" [value]="networkType">{{networkType}}</option>
+      </select>
+      <validation-error [control]="parentForm.controls.socialProfiles.controls[i].get('network')"></validation-error>
+    </div>
+  </div>
+  <button (click)="addSocialProfiles()" class="btn btn-default">Add another phone + </button>
 </div>

@@ -41,16 +41,15 @@ export class ResumeDetailView {
   /* hooks */
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(data => {
-       this.resumeDetail = data['resumeDetail'];
-        console.log('this.resumeDetail.result', this.resumeDetail.result);
+      this.resumeDetail = data['resumeDetail'];
+      console.log('this.resumeDetail.result', this.resumeDetail.result);
     });
+    console.log('this.resumeDetail', this.resumeDetail);
 
     this.error = '!qwerty';
 
     this.phoneTypes = ['phone', 'mobile'];
     this.networkTypes = ['linkedin', 'github', 'twitter'];
-
-    console.log('resumeDetail.state', this.resumeDetail.state);
 
     this.formBuild();
 
@@ -120,12 +119,10 @@ export class ResumeDetailView {
   }
 
   save(): void {
-    console.log('this.form', this.form.value);
-
     this.resumeDetail.save(this.form.value)
       .OK('OK')(() => {
         this.router
-          .navigate(['cv/resume-list'])
+          .navigate(['cv/resume', { id: this.resumeDetail.result.id }])
           .then(() => {
             this.error = '';
           });

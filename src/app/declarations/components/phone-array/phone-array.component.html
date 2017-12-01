@@ -1,40 +1,42 @@
 <ul class="list-unstyled interests-list" *ngIf="!phonesEditSelfState && state !== StatesEnum.Create">
-    <li *ngFor="let phoneNumber of phoneNumbers; let i=index">
-        <i class="fa fa-{{phoneNumber.type}}"></i>
-        <a href="tel:{{phoneNumber.number}}">{{phoneNumber.number}}</a>
-    </li>
+  <li *ngFor="let phoneNumber of parentForm.value.phoneNumber; let i=index">
+    <a href="tel:{{phoneNumber.number}}" class="text-truncate">
+      <i class="fa fa-{{phoneNumber.type}}"></i>
+      {{phoneNumber.number}}
+    </a>
+  </li>
 </ul>
 <div *ngIf="phonesEditSelfState || state === StatesEnum.Create">
-    <div
-        *ngFor="let phoneNumber of parentForm.controls.phoneNumber.controls; let i=index"
-        [formGroup]="parentForm.controls.phoneNumber.controls[i]"
-    >
-        <span
-            class="glyphicon glyphicon-remove pull-right form-group"
-            *ngIf="parentForm.controls.phoneNumber.controls.length > 1"
-            (click)="removePhone(i)"
-        ></span>
-        <div class="form-group">
-            <input
-                formControlName="number"
-                type="text"
-                class="form-control custom-control large"
-                pTooltip="Enter phone"
-                tooltipPosition="top"
-            />
-            <validation-error [control]="parentForm.controls.phoneNumber.controls[i].get('number')"></validation-error>
-        </div>
-        <div class="form-group">
-            <select
-                class="form-control custom-control large"
-                formControlName="type"
-                pTooltip="Select phone type"
-                tooltipPosition="top"
-            >
-                <option *ngFor="let phoneType of phoneTypes" [value]="phoneType">{{phoneType}}</option>
-            </select>
-            <validation-error [control]="parentForm.controls.phoneNumber.controls[i].get('type')"></validation-error>
-        </div>
+  <div
+    *ngFor="let phoneNumber of parentForm.controls.phoneNumber.controls; let i=index"
+    [formGroup]="parentForm.controls.phoneNumber.controls[i]"
+  >
+    <span
+      class="glyphicon glyphicon-remove pull-right form-group"
+      *ngIf="parentForm.controls.phoneNumber.controls.length > 1"
+      (click)="removePhone(i)"
+    ></span>
+    <div class="form-group">
+      <input
+        formControlName="number"
+        type="text"
+        class="form-control custom-control large"
+        pTooltip="Enter phone"
+        tooltipPosition="top"
+      />
+      <validation-error [control]="parentForm.controls.phoneNumber.controls[i].get('number')"></validation-error>
     </div>
-    <button (click)="addPhone()" class="btn btn-default">Add another phone + </button>
+    <div class="form-group">
+      <select
+        class="form-control custom-control large"
+        formControlName="type"
+        pTooltip="Select phone type"
+        tooltipPosition="top"
+      >
+        <option *ngFor="let phoneType of phoneTypes" [value]="phoneType">{{phoneType}}</option>
+      </select>
+      <validation-error [control]="parentForm.controls.phoneNumber.controls[i].get('type')"></validation-error>
+    </div>
+  </div>
+  <button (click)="addPhone()" class="btn btn-default">Add another phone + </button>
 </div>

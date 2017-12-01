@@ -1,38 +1,38 @@
 <ul class="list-unstyled interests-list" *ngIf="!languageEditSelfState && state !== StatesEnum.Create">
-    <li *ngFor="let language of languages; let i=index">
-        {{language.name}}
-        <span class="lang-desc">({{language.level}})</span>
-    </li>
+  <li *ngFor="let language of parentForm.value.languages; let i=index" class="text-truncate">
+    {{language.name}}
+    <span class="lang-desc">({{language.level}})</span>
+  </li>
 </ul>
 <div class="form-group" *ngIf="languageEditSelfState || state === StatesEnum.Create">
-    <div *ngFor="let language of parentForm.controls.languages.controls; let i=index">
-        <span
-            class="glyphicon glyphicon-remove pull-right form-group"
-            *ngIf="parentForm.controls.languages.controls.length > 1"
-            (click)="removeLanguage(i)"
-        ></span>
-        <div [formGroup]="parentForm.controls.languages.controls[i]">
-            <div class="form-group">
-                <input
-                    type="text"
-                    class="form-control"
-                    formControlName="name"
-                    pTooltip="Enter language"
-                    tooltipPosition="top"
-                />
-                <validation-error [control]="parentForm.controls.languages.controls[i].get('name')"></validation-error>
-            </div>
-            <div class="form-group">
-                <input
-                    type="text"
-                    class="form-control"
-                    formControlName="level"
-                    pTooltip="Enter Level"
-                    tooltipPosition="top"
-                />
-                <validation-error [control]="parentForm.controls.languages.controls[i].get('level')"></validation-error>
-            </div>
-        </div>
+  <div *ngFor="let language of parentForm.controls.languages.controls; let i=index">
+    <span
+      class="glyphicon glyphicon-remove pull-right form-group"
+      *ngIf="parentForm.controls.languages.controls.length > 1"
+      (click)="removeLanguage(i)"
+    ></span>
+    <div [formGroup]="parentForm.controls.languages.controls[i]">
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="name"
+          pTooltip="Enter language"
+          tooltipPosition="top"
+        />
+        <validation-error [control]="parentForm.controls.languages.controls[i].get('name')"></validation-error>
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="level"
+          pTooltip="Enter Level"
+          tooltipPosition="top"
+        />
+        <validation-error [control]="parentForm.controls.languages.controls[i].get('level')"></validation-error>
+      </div>
     </div>
-    <button (click)="addLanguage()" class="btn btn-default">Add another language + </button>
+  </div>
+  <button (click)="addLanguage()" class="btn btn-default">Add another language + </button>
 </div>

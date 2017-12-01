@@ -46,7 +46,7 @@ export function resumeFactory(httpService: HttpService, objectValidator: ObjectV
   class ResumeModel implements IResumeModel {
     state: StatesEnum;
     etalon: Object;
-    baseURL: string = '/resume-list';
+    baseURL: string = '/resume';
 
     id: Number;
     name: String;
@@ -178,11 +178,10 @@ export function resumeFactory(httpService: HttpService, objectValidator: ObjectV
       switch (this.state) {
         case StatesEnum.Edit:
           // httpRequest = httpService.put(this.urlBuild(this.entityIDGet()), json);
-          httpRequest = httpService.put('/resume/1', json);
+          httpRequest = httpService.put(this.urlBuild(1), json);
           break;
         case StatesEnum.Create:
-          // httpRequest = httpService.post(this.baseURL, json);
-          httpRequest = httpService.post('/resume', json);
+          httpRequest = httpService.post(this.baseURL, json);
           break;
         default:
           console.log('err');
@@ -200,11 +199,13 @@ export function resumeFactory(httpService: HttpService, objectValidator: ObjectV
       return `${this.baseURL}/${id}`;
     }
 
-    private entityIDGet() {
+    private entityIDGet(): number {
       return this.result.id;
     }
 
-    private jsonFormatCheck(json: any) {
+    private jsonFormatCheck(json: any): void {
+      console.log('json', json);
+      console.log('this.etalon', this.etalon);
       objectValidator.validate(json, this.etalon);
     }
   }

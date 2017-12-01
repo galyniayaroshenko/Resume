@@ -1,69 +1,69 @@
 <div *ngIf="!educationEditSelfState && state !== StatesEnum.Create" class="form-group">
-    <div *ngFor="let education of education; let i=index" class="item">
-        <h4 class="degree">{{education.level_qualifications}}</h4>
-        <h5 class="meta">{{education.school}} ({{education.area}})</h5>
-        <div class="time">{{education.startDate}} - {{education.endDate}}</div>
-    </div>
+  <div *ngFor="let education of parentForm.value.education; let i=index" class="item">
+    <h4 class="degree text-truncate">{{education.level_qualifications}}</h4>
+    <h5 class="meta text-truncate">{{education.school}} ({{education.area}})</h5>
+    <div class="time text-truncate">{{education.startDate}} - {{education.endDate}}</div>
+  </div>
 </div>
 <div *ngIf="educationEditSelfState || state === StatesEnum.Create">
-    <div *ngFor="let education of parentForm.controls.education.controls; let i=index">
-        <span
-            class="glyphicon glyphicon-remove pull-right form-group"
-            *ngIf="parentForm.controls.education.controls.length > 1"
-            (click)="removeEducation(i)"
-        ></span>
-        <div [formGroup]="parentForm.controls.education.controls[i]" class="form-group">
-            <div class="form-group">
-                <input
-                    type="text"
-                    class="form-control"
-                    formControlName="level_qualifications"
-                    pTooltip="Enter level_qualifications"
-                    tooltipPosition="top"
-                />
-                <validation-error [control]="parentForm.controls.education.controls[i].get('level_qualifications')"></validation-error>
-            </div>
-            <div class="form-group">
-                <input
-                    type="text"
-                    class="form-control"
-                    formControlName="school"
-                    pTooltip="Enter school"
-                    tooltipPosition="top"
-                />
-                <validation-error [control]="parentForm.controls.education.controls[i].get('school')"></validation-error>
-            </div>
-            <div class="form-group">
-                <input
-                    type="text"
-                    class="form-control"
-                    formControlName="startDate"
-                    pTooltip="Enter startDate"
-                    tooltipPosition="top"
-                />
-                <validation-error [control]="parentForm.controls.education.controls[i].get('startDate')"></validation-error>
-            </div>
-            <div class="form-group">
-                <input
-                    type="text"
-                    class="form-control"
-                    formControlName="endDate"
-                    pTooltip="Enter endDate"
-                    tooltipPosition="top"
-                />
-                <validation-error [control]="parentForm.controls.education.controls[i].get('endDate')"></validation-error>
-            </div>
-            <div class="form-group">
-                <input
-                    type="text"
-                    class="form-control"
-                    formControlName="area"
-                    pTooltip="Enter area"
-                    tooltipPosition="top"
-                />
-                <validation-error [control]="parentForm.controls.education.controls[i].get('area')"></validation-error>
-            </div>
-        </div>
+  <div *ngFor="let education of parentForm.controls.education.controls; let i=index">
+    <span
+      class="glyphicon glyphicon-remove pull-right form-group"
+      *ngIf="parentForm.controls.education.controls.length > 1"
+      (click)="removeEducation(i)"
+    ></span>
+    <div [formGroup]="parentForm.controls.education.controls[i]" class="form-group">
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="level_qualifications"
+          pTooltip="Enter level_qualifications"
+          tooltipPosition="top"
+        />
+        <validation-error [control]="parentForm.controls.education.controls[i].get('level_qualifications')"></validation-error>
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="school"
+          pTooltip="Enter school"
+          tooltipPosition="top"
+        />
+        <validation-error [control]="parentForm.controls.education.controls[i].get('school')"></validation-error>
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="startDate"
+          pTooltip="Enter startDate"
+          tooltipPosition="top"
+        />
+        <validation-error [control]="parentForm.controls.education.controls[i].get('startDate')"></validation-error>
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="endDate"
+          pTooltip="Enter endDate"
+          tooltipPosition="top"
+        />
+        <validation-error [control]="parentForm.controls.education.controls[i].get('endDate')"></validation-error>
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="area"
+          pTooltip="Enter area"
+          tooltipPosition="top"
+        />
+        <validation-error [control]="parentForm.controls.education.controls[i].get('area')"></validation-error>
+      </div>
     </div>
-    <button (click)="addEducation()" class="btn btn-default">Add another education + </button>
+  </div>
+  <button (click)="addEducation()" class="btn btn-default">Add another education + </button>
 </div>

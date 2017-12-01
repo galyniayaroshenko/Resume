@@ -1,27 +1,27 @@
 <ul class="list-unstyled interests-list" *ngIf="!interestEditSelfState && state !== StatesEnum.Create">
-    <li *ngFor="let interest of interests; let i=index">
-        {{interest.name}}
-    </li>
+  <li *ngFor="let interest of parentForm.value.interests; let i=index" class="text-truncate">
+    {{interest.name}}
+  </li>
 </ul>
 <div class="form-group" *ngIf="interestEditSelfState || state === StatesEnum.Create">
-    <div *ngFor="let interest of parentForm.controls.interests.controls; let i=index">
-        <span
-            class="glyphicon glyphicon-remove pull-right form-group"
-            *ngIf="parentForm.controls.interests.controls.length > 1"
-            (click)="removeInterest(i)"
-        ></span>
-        <div [formGroup]="parentForm.controls.interests.controls[i]">
-            <div class="form-group">
-                <input
-                    type="text"
-                    class="form-control"
-                    formControlName="name"
-                    pTooltip="Enter interest"
-                    tooltipPosition="top"
-                />
-                <validation-error [control]="parentForm.controls.interests.controls[i].get('name')"></validation-error>
-            </div>
-        </div>
+  <div *ngFor="let interest of parentForm.controls.interests.controls; let i=index">
+    <span
+      class="glyphicon glyphicon-remove pull-right form-group"
+      *ngIf="parentForm.controls.interests.controls.length > 1"
+      (click)="removeInterest(i)"
+    ></span>
+    <div [formGroup]="parentForm.controls.interests.controls[i]">
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="name"
+          pTooltip="Enter interest"
+          tooltipPosition="top"
+        />
+        <validation-error [control]="parentForm.controls.interests.controls[i].get('name')"></validation-error>
+      </div>
     </div>
-    <button (click)="addInterest()" class="btn btn-default">Add another interest + </button>
+  </div>
+  <button (click)="addInterest()" class="btn btn-default">Add another interest + </button>
 </div>

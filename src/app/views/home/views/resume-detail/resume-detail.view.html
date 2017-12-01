@@ -5,7 +5,7 @@
         <img class="profile" src="../../../../../assets/images/profile.jpg" alt="" />
         <div class="form-group">
           <h1
-            class="name"
+            class="name text-truncate"
             *ngIf="!nameEditSelfState"
           >{{form.value.name}}</h1>
           <input
@@ -26,7 +26,7 @@
         </div>
         <div class="form-group">
           <h3
-            class="tagline"
+            class="tagline text-truncate"
             *ngIf="!positionEditSelfState"
           >{{form.value.position}}</h3>
           <input
@@ -109,12 +109,14 @@
       <div class="contact-container container-block" *ngIf="resumeDetail.state !== StatesEnum.Create">
         <ul class="list-unstyled contact-list">
           <li class="email">
-            <i class="fa fa-envelope-o"></i>
             <a
               *ngIf="!emailEditSelfState"
               href="{{form.value.email}}"
               class="text-truncate"
-            >{{form.value.email}}</a>
+            >
+              <i class="fa fa-envelope-o"></i>
+              {{form.value.email}}
+            </a>
             <input
               *ngIf="emailEditSelfState"
               formControlName="email"
@@ -123,20 +125,22 @@
               pTooltip="Enter email"
               tooltipPosition="top"
             />
-            <validation-error [control]="form.get('email')"></validation-error>
             <cv-edit-button
               *ngIf="resumeDetail.state === StatesEnum.Edit"
               (click)="emailEditSelfState = !emailEditSelfState"
               [disabled]="form.controls.email.invalid"
             ></cv-edit-button>
+            <validation-error [control]="form.get('email')"></validation-error>
           </li>
           <li class="skype">
-            <i class="fa fa-skype" aria-hidden="true"></i>
             <a
               *ngIf="!skypeEditSelfState"
               href="{{form.value.skype}}"
               class="text-truncate"
-            >{{form.value.skype}}</a>
+            >
+              <i class="fa fa-skype" aria-hidden="true"></i>
+              {{form.value.skype}}
+            </a>
             <input
               *ngIf="skypeEditSelfState"
               formControlName="skype"
@@ -291,7 +295,7 @@
                 <div>Website - {{experience.website || 'None'}}</div>
                 <span>Tools:</span>
                 <span *ngFor="let tool of (form.value.experience[i].tools || resumeDetail.result.work_experience[i].tools); let i = index">
-                {{tool.name || 'None'}},
+                  {{tool.name || 'None'}},
                 </span>
                 <div>Responsibilities - {{experience.responsibilities || 'None'}}</div>
               </div>
