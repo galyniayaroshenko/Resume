@@ -16,6 +16,7 @@ import * as jsPDF from 'jspdf';
 
 export class ResumeDetailView {
   StatesEnum = StatesEnum;
+  nameEditSelfState: Boolean = false;
 
   phoneTypes: any;
   networkTypes: any;
@@ -135,6 +136,10 @@ export class ResumeDetailView {
         console.log('errors general', error);
         this.error = error;
       });
+  }
+
+  stateUpdated(event: boolean): void {
+    this.nameEditSelfState = event;
   }
 
   /* private methods */

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'cv-edit-button',
@@ -11,8 +11,14 @@ export class EditButtonComponent {
 
   @Input() class: String;
   @Input() disabled: Boolean;
+  @Input() nameEditSelfState: Boolean;
+
+  @Output() stateUpdated = new EventEmitter();
 
   editSelf(): void {
+    this.nameEditSelfState = !this.nameEditSelfState;
+    this.stateUpdated.emit(this.nameEditSelfState);
+    console.log('nameEditSelfState', this.nameEditSelfState);
     this.visible = !this.visible;
   }
 }

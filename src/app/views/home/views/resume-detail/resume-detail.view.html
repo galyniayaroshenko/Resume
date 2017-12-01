@@ -20,9 +20,11 @@
           <cv-edit-button
             *ngIf="resumeDetail.state === StatesEnum.Edit"
             class="large marginBottom"
-            (click)="nameEditSelfState = !nameEditSelfState"
             [disabled]="form.controls.name.invalid"
+            [nameEditSelfState]="nameEditSelfState"
+            (stateUpdated)="stateUpdated($event)"
           ></cv-edit-button>
+            <!--(click)="nameEditSelfState = !nameEditSelfState"-->
         </div>
         <div class="form-group">
           <h3
