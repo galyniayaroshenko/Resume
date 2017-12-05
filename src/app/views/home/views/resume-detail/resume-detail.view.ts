@@ -17,15 +17,29 @@ import * as jsPDF from 'jspdf';
 export class ResumeDetailView {
   StatesEnum = StatesEnum;
 
+  EditSelfState = {
+    name: false,
+    position: false,
+    email: false,
+    skype: false,
+    socialProfiles: false,
+    phones: false,
+    education: false,
+    language: false,
+    interest: false,
+    profile: false,
+    experience: false,
+    projects: false,
+    skills: false
+  };
+
   phoneTypes: any;
   networkTypes: any;
-  experienceEditSelfState: boolean = false;
 
   form: FormGroup;
   ctrl: AbstractControl;
 
-  // resumeDetail: IResumeModel;
-  resumeDetail: any;
+  resumeDetail: IResumeModel;
 
   error: String;
 
@@ -44,9 +58,6 @@ export class ResumeDetailView {
       this.resumeDetail = data['resumeDetail'];
       console.log('this.resumeDetail.result', this.resumeDetail.result);
     });
-    console.log('this.resumeDetail', this.resumeDetail);
-
-    this.error = '!qwerty';
 
     this.phoneTypes = ['phone', 'mobile'];
     this.networkTypes = ['linkedin', 'github', 'twitter'];
@@ -71,6 +82,50 @@ export class ResumeDetailView {
   get skillControl(): FormArray {
     return <FormArray>this.form.get('skills');
   };
+
+  stateUpdated(state: boolean, value: string): void {
+    switch (value) {
+      case 'name':
+        this.EditSelfState.name = state;
+        break;
+      case 'position':
+        this.EditSelfState.position = state;
+        break;
+      case 'email':
+        this.EditSelfState.email = state;
+        break;
+      case 'skype':
+        this.EditSelfState.skype = state;
+        break;
+      case 'socialProfiles':
+        this.EditSelfState.socialProfiles = state;
+        break;
+      case 'phones':
+        this.EditSelfState.phones = state;
+        break;
+      case 'education':
+        this.EditSelfState.education = state;
+        break;
+      case 'language':
+        this.EditSelfState.language = state;
+        break;
+      case 'interest':
+        this.EditSelfState.interest = state;
+        break;
+      case 'profile':
+        this.EditSelfState.profile = state;
+        break;
+      case 'experience':
+        this.EditSelfState.experience = state;
+        break;
+      case 'projects':
+        this.EditSelfState.projects = state;
+        break;
+      case 'skills':
+        this.EditSelfState.skills = state;
+        break;
+    }
+  }
 
   edit(): void {
     this.resumeDetail.edit();

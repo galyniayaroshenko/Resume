@@ -6,44 +6,46 @@
         <div class="form-group">
           <h1
             class="name text-truncate"
-            *ngIf="!nameEditSelfState"
+            *ngIf="!EditSelfState.name"
           >{{form.value.name}}</h1>
           <input
-            *ngIf="nameEditSelfState"
+            *ngIf="EditSelfState.name"
             type="text"
             formControlName="name"
             class="form-control custom-control large"
             pTooltip="Enter name"
             tooltipPosition="top"
           />
-          <validation-error [control]="form.get('name')"></validation-error>
           <cv-edit-button
             *ngIf="resumeDetail.state === StatesEnum.Edit"
             class="large marginBottom"
-            (click)="nameEditSelfState = !nameEditSelfState"
             [disabled]="form.controls.name.invalid"
+            [state]="EditSelfState.name"
+            (stateUpdated)="stateUpdated($event, 'name')"
           ></cv-edit-button>
+          <validation-error [control]="form.get('name')"></validation-error>
         </div>
         <div class="form-group">
           <h3
             class="tagline text-truncate"
-            *ngIf="!positionEditSelfState"
+            *ngIf="!EditSelfState.position"
           >{{form.value.position}}</h3>
           <input
-            *ngIf="positionEditSelfState"
+            *ngIf="EditSelfState.position"
             type="text"
             formControlName="position"
             class="form-control custom-control medium"
             pTooltip="Enter position"
             tooltipPosition="top"
           />
-          <validation-error [control]="form.get('position')"></validation-error>
           <cv-edit-button
             *ngIf="resumeDetail.state === StatesEnum.Edit"
-            (click)="positionEditSelfState = !positionEditSelfState"
             class="medium"
             [disabled]="form.controls.position.invalid"
+            [state]="EditSelfState.position"
+            (stateUpdated)="stateUpdated($event, 'position')"
           ></cv-edit-button>
+          <validation-error [control]="form.get('position')"></validation-error>
         </div>
       </div>
     <!--//profile-container-->
@@ -110,7 +112,7 @@
         <ul class="list-unstyled contact-list">
           <li class="email">
             <a
-              *ngIf="!emailEditSelfState"
+              *ngIf="!EditSelfState.email"
               href="{{form.value.email}}"
               class="text-truncate"
             >
@@ -118,7 +120,7 @@
               {{form.value.email}}
             </a>
             <input
-              *ngIf="emailEditSelfState"
+              *ngIf="EditSelfState.email"
               formControlName="email"
               type="text"
               class="form-control custom-control small"
@@ -127,14 +129,15 @@
             />
             <cv-edit-button
               *ngIf="resumeDetail.state === StatesEnum.Edit"
-              (click)="emailEditSelfState = !emailEditSelfState"
               [disabled]="form.controls.email.invalid"
+              [state]="EditSelfState.email"
+              (stateUpdated)="stateUpdated($event, 'email')"
             ></cv-edit-button>
             <validation-error [control]="form.get('email')"></validation-error>
           </li>
           <li class="skype">
             <a
-              *ngIf="!skypeEditSelfState"
+              *ngIf="!EditSelfState.skype"
               href="{{form.value.skype}}"
               class="text-truncate"
             >
@@ -142,19 +145,20 @@
               {{form.value.skype}}
             </a>
             <input
-              *ngIf="skypeEditSelfState"
+              *ngIf="EditSelfState.skype"
               formControlName="skype"
               type="text"
               class="form-control custom-control small"
               pTooltip="Enter skype"
               tooltipPosition="top"
             />
-            <validation-error [control]="form.get('skype')"></validation-error>
             <cv-edit-button
               *ngIf="resumeDetail.state === StatesEnum.Edit"
-              (click)="skypeEditSelfState = !skypeEditSelfState"
               [disabled]="form.controls.skype.invalid"
+              [state]="EditSelfState.skype"
+              (stateUpdated)="stateUpdated($event, 'skype')"
             ></cv-edit-button>
+            <validation-error [control]="form.get('skype')"></validation-error>
           </li>
         </ul>
       </div>
@@ -165,14 +169,15 @@
             <cv-edit-button
               *ngIf="resumeDetail.state === StatesEnum.Edit"
               class="medium"
-              (click)="socialProfilesEditSelfState = !socialProfilesEditSelfState"
+              [disabled]="form.controls.socialProfiles.invalid"
+              [state]="EditSelfState.socialProfiles"
+              (stateUpdated)="stateUpdated($event, 'socialProfiles')"
             ></cv-edit-button>
-
             <cv-social-profile-array
               [parentForm]="form"
               [socialProfiles]="resumeDetail.result?.social_profiles"
               [networkTypes]="networkTypes"
-              [socialProfilesEditSelfState]="socialProfilesEditSelfState"
+              [socialProfilesEditSelfState]="EditSelfState.socialProfiles"
               [state]="resumeDetail.state"
             ></cv-social-profile-array>
         </div>
@@ -183,13 +188,15 @@
           <cv-edit-button
             *ngIf="resumeDetail.state === StatesEnum.Edit"
             class="medium"
-            (click)="phonesEditSelfState= !phonesEditSelfState"
+            [disabled]="form.controls.phoneNumber.invalid"
+            [state]="EditSelfState.phones"
+            (stateUpdated)="stateUpdated($event, 'phones')"
           ></cv-edit-button>
           <cv-phone-array
             [parentForm]="form"
             [phoneNumbers]="resumeDetail.result?.phoneNumbers"
             [phoneTypes]="phoneTypes"
-            [phonesEditSelfState]="phonesEditSelfState"
+            [phonesEditSelfState]="EditSelfState.phones"
             [state]="resumeDetail.state"
           ></cv-phone-array>
         </div>
@@ -200,12 +207,14 @@
           <cv-edit-button
             *ngIf="resumeDetail.state === StatesEnum.Edit"
             class="medium"
-            (click)="educationEditSelfState = !educationEditSelfState"
+            [disabled]="form.controls.education.invalid"
+            [state]="EditSelfState.education"
+            (stateUpdated)="stateUpdated($event, 'education')"
           ></cv-edit-button>
           <cv-education-array
             [parentForm]="form"
             [education]="resumeDetail.result?.education"
-            [educationEditSelfState]="educationEditSelfState"
+            [educationEditSelfState]="EditSelfState.education"
             [state]="resumeDetail.state"
           ></cv-education-array>
         </div>
@@ -216,12 +225,14 @@
           <cv-edit-button
             *ngIf="resumeDetail.state === StatesEnum.Edit"
             class="medium"
-            (click)="languageEditSelfState = !languageEditSelfState"
+            [disabled]="form.controls.languages.invalid"
+            [state]="EditSelfState.language"
+            (stateUpdated)="stateUpdated($event, 'language')"
           ></cv-edit-button>
           <cv-language-array
             [parentForm]="form"
             [languages]="resumeDetail.result?.languages"
-            [languageEditSelfState]="languageEditSelfState"
+            [languageEditSelfState]="EditSelfState.language"
             [state]="resumeDetail.state"
           ></cv-language-array>
         </div>
@@ -232,12 +243,14 @@
           <cv-edit-button
             *ngIf="resumeDetail.state === StatesEnum.Edit"
             class="medium"
-            (click)="interestEditSelfState = !interestEditSelfState"
+            [disabled]="form.controls.interests.invalid"
+            [state]="EditSelfState.interest"
+            (stateUpdated)="stateUpdated($event, 'interest')"
           ></cv-edit-button>
           <cv-interest-array
             [parentForm]="form"
             [interests]="resumeDetail.result?.interests"
-            [interestEditSelfState]="interestEditSelfState"
+            [interestEditSelfState]="EditSelfState.interest"
             [state]="resumeDetail.state"
           ></cv-interest-array>
         </div>
@@ -256,14 +269,15 @@
               <cv-edit-button
                 *ngIf="resumeDetail.state === StatesEnum.Edit"
                 class="large colorGreen"
-                (click)="profileEditSelfState = !profileEditSelfState"
                 [disabled]="form.controls.profile.invalid"
+                [state]="EditSelfState.profile"
+                (stateUpdated)="stateUpdated($event, 'profile')"
               ></cv-edit-button>
               <div class="summary">
-                <p *ngIf="!profileEditSelfState && resumeDetail.state !== StatesEnum.Create">{{form.value.profile}}</p>
+                <p *ngIf="!EditSelfState.profile && resumeDetail.state !== StatesEnum.Create">{{form.value.profile}}</p>
                 <textarea
                   formControlName="profile"
-                  *ngIf="profileEditSelfState || resumeDetail.state === StatesEnum.Create"
+                  *ngIf="EditSelfState.profile || resumeDetail.state === StatesEnum.Create"
                   class="form-control custom-textarea-control"
                   rows="5"
                   id="comment"
@@ -279,10 +293,11 @@
             <cv-edit-button
               *ngIf="resumeDetail.state === StatesEnum.Edit"
               class="large colorGreen"
-              (click)="experienceEditSelfState = !experienceEditSelfState"
               [disabled]="form.controls.experience.invalid"
+              [state]="EditSelfState.experience"
+              (stateUpdated)="stateUpdated($event, 'experience')"
             ></cv-edit-button>
-            <div *ngIf="!experienceEditSelfState && resumeDetail.state !== StatesEnum.Create">
+            <div *ngIf="!EditSelfState.experience && resumeDetail.state !== StatesEnum.Create">
               <div class="item" *ngFor="let experience of form.value.experience; let i=index">
                 <div class="meta">
                   <div class="upper-row">
@@ -300,7 +315,7 @@
                 <div>Responsibilities - {{experience.responsibilities || 'None'}}</div>
               </div>
             </div>
-            <div formArrayName="experience" *ngIf="experienceEditSelfState || resumeDetail.state === StatesEnum.Create">
+            <div formArrayName="experience" *ngIf="EditSelfState.experience || resumeDetail.state === StatesEnum.Create">
               <div *ngFor="let experience of form.controls.experience.controls; let i=index" class="panel panel-default">
                 <div class="panel-heading">
                   <span>Experience {{i + 1}}</span>
@@ -325,10 +340,11 @@
             <cv-edit-button
               *ngIf="resumeDetail.state === StatesEnum.Edit"
               class="large colorGreen"
-              (click)="projectsEditSelfState = !projectsEditSelfState"
               [disabled]="form.controls.projects.invalid"
+              [state]="EditSelfState.projects"
+              (stateUpdated)="stateUpdated($event, 'projects')"
             ></cv-edit-button>
-            <div *ngIf="!projectsEditSelfState && resumeDetail.state !== StatesEnum.Create">
+            <div *ngIf="!EditSelfState.projects && resumeDetail.state !== StatesEnum.Create">
               <div class="item" *ngFor="let project of form.value.projects; let i=index">
                 <div class="meta">
                   <div class="upper-row">
@@ -346,7 +362,7 @@
                 <div>Type - {{project.type || 'None'}}</div>
               </div>
             </div>
-            <div formArrayName="projects" *ngIf="projectsEditSelfState || resumeDetail.state === StatesEnum.Create">
+            <div formArrayName="projects" *ngIf="EditSelfState.projects || resumeDetail.state === StatesEnum.Create">
               <div *ngFor="let project of form.controls.projects.controls; let i=index" class="panel panel-default">
                 <div class="panel-heading">
                   <span>Project {{i + 1}}</span>
@@ -371,10 +387,11 @@
             <cv-edit-button
               *ngIf="resumeDetail.state === StatesEnum.Edit"
               class="large colorGreen"
-              (click)="skillsEditSelfState = !skillsEditSelfState"
               [disabled]="form.controls.skills.invalid"
+              [state]="EditSelfState.skills"
+              (stateUpdated)="stateUpdated($event, 'skills')"
             ></cv-edit-button>
-            <div *ngIf="!skillsEditSelfState && resumeDetail.state !== StatesEnum.Create">
+            <div *ngIf="!EditSelfState.skills && resumeDetail.state !== StatesEnum.Create">
               <div class="item" *ngFor="let skill of form.value.skills; let i = index">
                 <span class="project-title"><a href="">{{skill.name}}</a></span> -
                 <span
@@ -385,7 +402,7 @@
                 </span>
               </div>
             </div>
-            <div formArrayName="skills" *ngIf="skillsEditSelfState || resumeDetail.state === StatesEnum.Create">
+            <div formArrayName="skills" *ngIf="EditSelfState.skills || resumeDetail.state === StatesEnum.Create">
               <div *ngFor="let skill of form.controls.skills.controls; let i=index" class="panel panel-default">
                 <div class="panel-heading">
                   <span>Skills {{i + 1}}</span>

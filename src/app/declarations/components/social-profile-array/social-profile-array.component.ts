@@ -27,7 +27,7 @@ export class SocialProfileArrayComponent {
       'socialProfiles',
       (!this.socialProfiles ? new FormArray([]) : this.formBuilder.array(
         this.socialProfiles.map((item: any) => this.formBuilder.group({
-          url: [item.url, [requiredValidator, maxLengthValidator(50)]],
+          url: [item.url, [requiredValidator, maxLengthValidator(150)]],
           network: [item.network, requiredValidator]
         }))
       ))
@@ -44,7 +44,7 @@ export class SocialProfileArrayComponent {
 
   initSocialProfiles() {
     return this.formBuilder.group({
-      url: ['', [requiredValidator, maxLengthValidator(50)]],
+      url: ['', [requiredValidator, maxLengthValidator(150)]],
       network: ['', requiredValidator]
     });
   }
