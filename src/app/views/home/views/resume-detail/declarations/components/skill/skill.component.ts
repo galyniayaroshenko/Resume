@@ -1,15 +1,15 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 
-import { maxLengthValidator, requiredValidator } from '../../../form-validators';
+import { maxLengthValidator, requiredValidator } from '../../../../../../../form-validators';
 
 @Component({
-  selector: 'cv-project',
-  templateUrl: 'project.component.html',
+  selector: 'cv-skill',
+  templateUrl: 'skill.component.html',
 })
 
-export class ProjectComponent {
-  @Input('group') public projectsForm: FormGroup;
+export class SkillComponent {
+  @Input('group') public skillForm: FormGroup;
   @Input('tools') public tools: any;
 
   constructor(private formBuilder: FormBuilder) {}
@@ -17,7 +17,7 @@ export class ProjectComponent {
   ngOnInit() {
     this.tools = this.tools ? this.tools : [];
 
-    this.projectsForm.addControl(
+    this.skillForm.addControl(
       'tools',
       this.formBuilder.array(this.tools.map((item: any) => this.formBuilder.group({
         id: [item.id],
@@ -27,7 +27,7 @@ export class ProjectComponent {
   }
 
   get control(): FormArray {
-    return <FormArray>this.projectsForm.get('tools');
+    return <FormArray>this.skillForm.get('tools');
   };
 
   initTool() {

@@ -4,10 +4,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { DataTableModule } from 'primeng/components/datatable/datatable';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { TooltipModule } from 'primeng/primeng';
 
 import { ResumeListView } from './resume-list.view';
 
-import { TooltipModule } from 'primeng/primeng';
+import { DeclarationsModule } from './declarations';
 
 @NgModule({
   declarations: [
@@ -20,8 +21,9 @@ import { TooltipModule } from 'primeng/primeng';
 
     DataTableModule,
     PerfectScrollbarModule,
+    TooltipModule,
 
-    TooltipModule
+    DeclarationsModule
   ]
 })
 

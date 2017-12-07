@@ -7,12 +7,12 @@ export class HttpConfig {
   public defaultHandlers: HttpHandlers = new HttpHandlers();
 
   constructor(router: Router) {
-    // if (process.env.ENV === 'production') {
-    //   this.apiURL = '/app/';
-    // } else {
-    //   this.apiURL = 'https://localhost:8080/api';
-    // }
-    this.apiURL = 'https://private-3e6c5c-resume4.apiary-mock.com';
+    if (process.env.ENV === 'production') {
+      this.apiURL = '/app/';
+    } else {
+      // this.apiURL = 'https://localhost:8080/api';
+      this.apiURL = 'https://private-3e6c5c-resume4.apiary-mock.com';
+    }
 
     this.defaultHandlers.DISCONNECTED(() => {
       console.log('Disconnected server');

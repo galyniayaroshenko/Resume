@@ -1,11 +1,10 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
-import { AbstractControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { maxLengthValidator, minLengthValidator, requiredValidator, emailValidator } from '../../../../form-validators';
 
-import { IResumeModel, StatesEnum } from '../../../../models/resume';
+import { IResumeModel, StatesEnum } from '../../models/resume';
 
 import * as jsPDF from 'jspdf';
 
@@ -37,7 +36,6 @@ export class ResumeDetailView {
   networkTypes: any;
 
   form: FormGroup;
-  ctrl: AbstractControl;
 
   resumeDetail: IResumeModel;
 
@@ -56,7 +54,6 @@ export class ResumeDetailView {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(data => {
       this.resumeDetail = data['resumeDetail'];
-      console.log('this.resumeDetail.result', this.resumeDetail.result);
     });
 
     this.phoneTypes = ['phone', 'mobile'];

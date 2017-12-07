@@ -1,15 +1,15 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 
-import { maxLengthValidator, requiredValidator } from '../../../form-validators';
+import { maxLengthValidator, requiredValidator } from '../../../../../../../form-validators';
 
 @Component({
-  selector: 'cv-experience',
-  templateUrl: 'experience.component.html',
+  selector: 'cv-project',
+  templateUrl: 'project.component.html',
 })
 
-export class ExperienceComponent {
-  @Input('group') public experienceForm: FormGroup;
+export class ProjectComponent {
+  @Input('group') public projectsForm: FormGroup;
   @Input('tools') public tools: any;
 
   constructor(private formBuilder: FormBuilder) {}
@@ -17,7 +17,7 @@ export class ExperienceComponent {
   ngOnInit() {
     this.tools = this.tools ? this.tools : [];
 
-    this.experienceForm.addControl(
+    this.projectsForm.addControl(
       'tools',
       this.formBuilder.array(this.tools.map((item: any) => this.formBuilder.group({
         id: [item.id],
@@ -27,7 +27,7 @@ export class ExperienceComponent {
   }
 
   get control(): FormArray {
-    return <FormArray>this.experienceForm.get('tools');
+    return <FormArray>this.projectsForm.get('tools');
   };
 
   initTool() {

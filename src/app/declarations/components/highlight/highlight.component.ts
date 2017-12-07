@@ -27,7 +27,6 @@ export class HighlightComponent {
         <button type="button" class="btn" (click)="save()">Save</button>
       </div>`
     );
-    // console.log('el', this.el);
   }
 
   onMouseLeave() {

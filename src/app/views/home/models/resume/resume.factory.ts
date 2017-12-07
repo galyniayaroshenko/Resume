@@ -1,5 +1,5 @@
-import { HttpRequest, HttpService } from '../../services/http';
-import { ObjectValidator } from '../../services/object-validator';
+import { HttpRequest, HttpService } from '../../../../services/http';
+import { ObjectValidator } from '../../../../services/object-validator';
 
 export enum StatesEnum {
   View,

@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 
-import { maxLengthValidator, requiredValidator } from '../../../form-validators';
+import { maxLengthValidator, requiredValidator } from '../../../../../../../form-validators';
 
-import { StatesEnum } from '../../../models/resume';
+import { StatesEnum } from '../../../../../models/resume';
 
 @Component({
   selector: 'cv-interest-array',

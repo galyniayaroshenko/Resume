@@ -6,15 +6,17 @@ import { HttpModule } from '@angular/http';
 import { routing } from './app.routing';
 import { Config } from './config';
 
-import { AuthViewModule } from './views/auth/auth.view.module';
-import { NotFoundViewModule } from './views/not-found/not-found.view.module';
-import { ForbiddenViewModule } from './views/forbidden/forbidden.view.module';
-import { UIKitViewModule } from './views/ui-kit/ui-kit.view.module';
-import { HomeViewModule } from './views/home/home.view.module';
+import { DeclarationsModule } from './declarations';
 
-import { ObjectValidator } from './services/object-validator';
-import { ResumeProvider } from './models/resume';
+import { AuthViewModule } from './views/auth/auth.view.module';
+import { ForbiddenViewModule } from './views/forbidden/forbidden.view.module';
+import { HomeViewModule } from './views/home/home.view.module';
+import { NotFoundViewModule } from './views/not-found/not-found.view.module';
+import { UIKitViewModule } from './views/ui-kit/ui-kit.view.module';
+
+import { AuthService } from './services/auth';
 import { EntityProvider } from './models/entity';
+import { ObjectValidator } from './services/object-validator';
 
 import { HttpService } from './services/http';
 
@@ -28,18 +30,19 @@ import { App } from './app';
 
     routing,
     AuthViewModule,
-    NotFoundViewModule,
+    DeclarationsModule,
     ForbiddenViewModule,
-    UIKitViewModule,
-    HomeViewModule
+    HomeViewModule,
+    NotFoundViewModule,
+    UIKitViewModule
   ],
   declarations: [
     App
   ],
   providers: [
-    ObjectValidator,
-    ResumeProvider,
+    AuthService,
     EntityProvider,
+    ObjectValidator,
 
     Config,
     HttpService

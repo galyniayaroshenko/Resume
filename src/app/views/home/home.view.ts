@@ -1,15 +1,19 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { AuthService } from '../../services/auth';
+
 @Component({
   styleUrls: ['./home.view.scss'],
   templateUrl: './home.view.html'
 })
 
 export class HomeView {
-  constructor(private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
-  logOut(): void {
-    this.router.navigate([`/auth`]);
+  logout(): void {
+    this.authService.logout().OK('OK')(() => {
+      this.router.navigate(['/auth']);
+    });
   }
 }
