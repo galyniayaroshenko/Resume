@@ -8,6 +8,8 @@ import { ResumeDetailResolve } from './resolves/resume-detail';
 import { ResumeListResolve } from './resolves/resume-list';
 import { UserResolve } from './resolves/user';
 
+import { PermissionsGuard } from '../../guards/permissions';
+
 export const routing = RouterModule.forChild([
   {
     path: 'cv',
@@ -16,6 +18,8 @@ export const routing = RouterModule.forChild([
       {
         path: 'resume-list',
         component: ResumeListView,
+        canActivate: [PermissionsGuard],
+        data: { action: 'view list of resume' },
         resolve: {
           resumeList: ResumeListResolve
         }

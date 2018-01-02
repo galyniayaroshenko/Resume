@@ -14,10 +14,14 @@ import { HomeViewModule } from './views/home/home.view.module';
 import { NotFoundViewModule } from './views/not-found/not-found.view.module';
 import { UIKitViewModule } from './views/ui-kit/ui-kit.view.module';
 
-import { AuthService } from './services/auth';
 import { ObjectValidator } from './services/object-validator';
 
+import { AuthService } from './services/auth';
+import { PermissionsService } from './services/permissions';
 import { HttpService } from './services/http';
+
+import { AuthGuard } from './guards/auth';
+import { PermissionsGuard } from './guards/permissions';
 
 import { App } from './app';
 
@@ -39,11 +43,15 @@ import { App } from './app';
     App
   ],
   providers: [
-    AuthService,
     ObjectValidator,
 
+    AuthGuard,
+    PermissionsGuard,
+
     Config,
-    HttpService
+    AuthService,
+    HttpService,
+    PermissionsService
   ],
   bootstrap: [ App ]
 })
