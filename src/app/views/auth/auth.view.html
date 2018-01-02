@@ -15,6 +15,7 @@
                   type="text"
                   formControlName="name"
               />
+              <validation-error [control]="form.get('name')"></validation-error>
             </div>
             <div class="form-group">
               <input
@@ -24,13 +25,19 @@
                 type="password"
                 formControlName="password"
               />
+              <validation-error [control]="form.get('password')"></validation-error>
             </div>
             <div class="checkbox">
               <label>
                 <input name="remember" type="checkbox" value="Remember Me"> Remember Me
               </label>
             </div>
-            <a class="btn btn-lg btn-success btn-block" (click)="login()">Login</a>
+            <button
+              type="button"
+              class="btn btn-success"
+              [disabled]="form.invalid"
+              (click)="login()"
+            >Login</button>
           </form>
         </div>
       </div>

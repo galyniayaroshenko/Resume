@@ -6,6 +6,7 @@ import { ResumeDetailView } from './views/resume-detail/resume-detail.view';
 
 import { ResumeDetailResolve } from './resolves/resume-detail';
 import { ResumeListResolve } from './resolves/resume-list';
+import { UserResolve } from './resolves/user';
 
 export const routing = RouterModule.forChild([
   {
@@ -26,6 +27,9 @@ export const routing = RouterModule.forChild([
           resumeDetail: ResumeDetailResolve
         }
       }
-    ]
+    ],
+    resolve: {
+      user: UserResolve
+    }
   }
 ]);

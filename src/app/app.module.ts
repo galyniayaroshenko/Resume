@@ -15,7 +15,6 @@ import { NotFoundViewModule } from './views/not-found/not-found.view.module';
 import { UIKitViewModule } from './views/ui-kit/ui-kit.view.module';
 
 import { AuthService } from './services/auth';
-import { EntityProvider } from './models/entity';
 import { ObjectValidator } from './services/object-validator';
 
 import { HttpService } from './services/http';
@@ -41,7 +40,6 @@ import { App } from './app';
   ],
   providers: [
     AuthService,
-    EntityProvider,
     ObjectValidator,
 
     Config,

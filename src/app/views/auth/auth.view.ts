@@ -27,7 +27,6 @@ export class AuthView {
   }
 
   login(): void {
-    console.log('credentials', this.form.value);
     this.authService.login(this.form.value)
       .OK('OK')(() => {
         this.router.navigate(['/cv/resume-list']);
@@ -40,8 +39,8 @@ export class AuthView {
   /* private methods */
   private formBuild(): void {
     this.form = this.formBuilder.group({
-      name: ['', [requiredValidator]],
-      password: ['', [requiredValidator, emailValidator]]
+      name: ['', [requiredValidator, emailValidator]],
+      password: ['', [requiredValidator]]
     });
   };
 }

@@ -7,8 +7,8 @@
       <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
           <div class="user-container">
             <div class="user pull-right">
-              <div class="user-name">Halyna Yroshenko</div>
-              <div class="user-position">Programmer</div>
+              <div class="user-name">{{user.name}}</div>
+              <div class="user-position">{{user.role.title}}</div>
             </div>
             <a class="log-out" href="" (click)="logout()">
               <span class="glyphicon glyphicon-log-out"></span>

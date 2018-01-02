@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { AuthService } from '../../services/auth';
+
+import { IUserModel } from './models/user';
 
 @Component({
   styleUrls: ['./home.view.scss'],
@@ -9,7 +11,21 @@ import { AuthService } from '../../services/auth';
 })
 
 export class HomeView {
-  constructor(private authService: AuthService, private router: Router) {}
+  user: IUserModel;
+
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
+  /* hooks */
+  ngOnInit(): void {
+    this.activatedRoute.data.subscribe(data => {
+      this.user = data['user'];
+      console.log('this.user', this.user);
+    });
+  }
 
   logout(): void {
     this.authService.logout().OK('OK')(() => {

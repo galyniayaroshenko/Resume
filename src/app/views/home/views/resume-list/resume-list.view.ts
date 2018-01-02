@@ -22,7 +22,6 @@ export class ResumeListView {
    ngOnInit() {
      this.activatedRoute.data.subscribe(data => {
        this.resumeList = data['resumeList'];
-       console.log('this.resumeList', this.resumeList);
      });
 
     // this.httpService.get('/resume-list').OK('OK')((data: any) => console.log('!!!data', data));

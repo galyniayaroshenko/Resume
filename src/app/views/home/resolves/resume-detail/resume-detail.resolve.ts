@@ -1,14 +1,14 @@
 import { Injectable, Injector } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 
-import { IResumeModel, ResumeToken, IResumeConstructor } from '../../models/resume';
+import { IResumeModel, ResumeModelToken, IResumeModelConstructor } from '../../models/resume';
 
 @Injectable()
 export class ResumeDetailResolve implements Resolve<IResumeModel> {
-  private ResumeModel: IResumeConstructor;
+  private ResumeModel: IResumeModelConstructor;
 
   constructor(private injector: Injector) {
-    this.ResumeModel = injector.get(ResumeToken) as IResumeConstructor;
+    this.ResumeModel = injector.get(ResumeModelToken) as IResumeModelConstructor;
   }
 
   resolve(route: ActivatedRouteSnapshot): Promise<IResumeModel|boolean> {

@@ -1,3 +1,5 @@
+import { Injector } from '@angular/core';
+
 import { HttpRequest, HttpService } from '../../../../services/http';
 import { ObjectValidator } from '../../../../services/object-validator';
 
@@ -23,6 +25,7 @@ export interface IResumeModel {
   education: any;
   languages: any;
   interests: any;
+  number: any;
 
   state: StatesEnum;
   etalon: Object;
@@ -38,11 +41,12 @@ export interface IResumeModel {
   urlBuild(id: number): string;
 }
 
-export interface IResumeConstructor extends IResumeModel {
-  new(): IResumeConstructor;
+export interface IResumeModelConstructor extends IResumeModel {
+  new(): IResumeModelConstructor;
 }
 
-export function resumeFactory(httpService: HttpService, objectValidator: ObjectValidator) {
+export function resumeModelFactory(injector: Injector, httpService: HttpService, objectValidator: ObjectValidator) {
+
   class ResumeModel implements IResumeModel {
     state: StatesEnum;
     etalon: Object;
@@ -63,6 +67,7 @@ export function resumeFactory(httpService: HttpService, objectValidator: ObjectV
     education: any;
     languages: any;
     interests: any;
+    number: any;
 
     result: any;
 
@@ -125,6 +130,10 @@ export function resumeFactory(httpService: HttpService, objectValidator: ObjectV
           required: true
         },
         interests: {
+          type: Array,
+          required: true
+        },
+        number: {
           type: Array,
           required: true
         }

@@ -14,8 +14,11 @@ import { routing } from './home.view.routing';
 
 import { ResumeDetailResolve } from './resolves/resume-detail';
 import { ResumeListResolve } from './resolves/resume-list';
+import { UserResolve } from './resolves/user';
 
-import { ResumeProvider } from './models/resume';
+import { ResumeModelProvider } from './models/resume';
+import { RoleModelProvider } from './models/role';
+import { UserModelProvider } from './models/user';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,11 @@ import { ResumeProvider } from './models/resume';
   providers: [
     ResumeDetailResolve,
     ResumeListResolve,
-    ResumeProvider
+    UserResolve,
+
+    ResumeModelProvider,
+    RoleModelProvider,
+    UserModelProvider
   ]
 })
 

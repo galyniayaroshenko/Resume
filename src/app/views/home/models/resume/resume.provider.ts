@@ -1,14 +1,14 @@
-import { OpaqueToken } from '@angular/core';
+import { OpaqueToken, Injector } from '@angular/core';
 
 import { HttpService } from '../../../../services/http';
 import { ObjectValidator } from '../../../../services/object-validator';
 
-import { resumeFactory } from './resume.factory';
+import { resumeModelFactory } from './resume.factory';
 
-export const ResumeToken = new OpaqueToken('ResumeModel');
+export const ResumeModelToken = new OpaqueToken('ResumeModel');
 
-export const ResumeProvider = {
-  provide: ResumeToken,
-  deps: [HttpService, ObjectValidator],
-  useFactory: resumeFactory
+export const ResumeModelProvider = {
+  provide: ResumeModelToken,
+  deps: [Injector, HttpService, ObjectValidator],
+  useFactory: resumeModelFactory
 };
