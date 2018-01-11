@@ -17,6 +17,7 @@ export class ResumeDetailView {
   StatesEnum = StatesEnum;
 
   EditSelfState = {
+    photo: false,
     name: false,
     position: false,
     email: false,
@@ -82,6 +83,9 @@ export class ResumeDetailView {
 
   stateUpdated(state: boolean, value: string): void {
     switch (value) {
+      case 'photo':
+        this.EditSelfState.photo = state;
+        break;
       case 'name':
         this.EditSelfState.name = state;
         break;
@@ -192,6 +196,7 @@ export class ResumeDetailView {
   /* private methods */
   private formBuild(): void {
     this.form = this.formBuilder.group({
+      photo: ['asd', [requiredValidator]],
       name: [
         this.resumeDetail.result ? this.resumeDetail.result.name : '',
         [requiredValidator, minLengthValidator(10), maxLengthValidator(16)]

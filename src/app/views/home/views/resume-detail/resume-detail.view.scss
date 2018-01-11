@@ -47,12 +47,28 @@
     margin-top: 0;
   }
   .profile {
-    border-radius: 50px;
-    margin-bottom: 15px;
-    object-fit: none;
-    object-position: center;
-    height: 100px;
-    width: 100px;
+    img {
+      border-radius: 50px;
+      margin-bottom: 15px;
+      object-fit: none;
+      object-position: center;
+      height: 100px;
+      width: 100px;
+      position: relative;
+    }
+    &.edit:after {
+      background: #000;
+      border-radius: 50px;
+      content: '';
+      display: block;
+      height: 100px;
+      left: 90px;
+      margin-bottom: 15px;
+      opacity: .3;
+      position: absolute;
+      top: 30px;
+      width: 100px;
+    }
   }
   .contact-list {
     .fa {

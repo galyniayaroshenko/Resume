@@ -28,7 +28,7 @@ export class ValidationErrorComponent {
   onStatusChange() {
     const messages = [];
 
-    if (this.ctrl && (this.ctrl.dirty) && this.ctrl.invalid) {
+    if (this.ctrl && (this.ctrl.dirty || this.ctrl.touched) && this.ctrl.invalid) {
 
       for (const validatorName in this.ctrl.errors) {
         messages.push(this.ctrl.errors[validatorName]);

@@ -2,7 +2,17 @@
   <form [formGroup]="form" class="form" >
     <div class="sidebar-wrapper {{resumeDetail.state === StatesEnum.Create ? 'create' : resumeDetail.state === StatesEnum.Edit ? 'edit' : ''}}">
       <div class="profile-container" *ngIf="resumeDetail.state !== StatesEnum.Create">
-        <img class="profile" src="../../../../../assets/images/profile.jpg" alt="" />
+        <div class="profile" [class.edit]="resumeDetail.state === StatesEnum.Edit">
+          <img src="../../../../../assets/images/profile.jpg" alt="" />
+        </div>
+        <input *ngIf="EditSelfState.photo" type="file" class="form-control custom-control"/>
+        <cv-edit-button
+          *ngIf="resumeDetail.state === StatesEnum.Edit"
+          class="large img"
+          [disabled]="form.controls.photo.invalid"
+          [state]="EditSelfState.photo"
+          (stateUpdated)="stateUpdated($event, 'photo')"
+        ></cv-edit-button>
         <div class="form-group">
           <h1
             class="name text-truncate"
@@ -98,14 +108,12 @@
         </div>
         <div class="form-group">
           <label>Photo</label>
-          <label class="btn btn-default btn-file">Browse</label>
           <input
             type="file"
-            style="display: none;"
             class="form-control"
+            formControlName="photo"
           />
-          <!--formControlName="photo"-->
-          <!--<validation-error [control]="form.get('photo')"></validation-error>-->
+          <validation-error [control]="form.get('photo')"></validation-error>
         </div>
       </div>
       <div class="contact-container container-block" *ngIf="resumeDetail.state !== StatesEnum.Create">

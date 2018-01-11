@@ -1,27 +1,33 @@
 .btn-edit {
-    background-color: transparent;
-    border-color: transparent;
-    padding: 2px 6px;
+	background-color: transparent;
+	border-color: transparent;
+	padding: 2px 6px;
 
-    &.marginBottom {
-        margin-bottom: 10px;
-    }
+	&.marginBottom {
+		margin-bottom: 10px;
+	}
+	&.img {
+		display: block;
+		position: absolute;
+		top: 68px;
+		left: 124px;
+	}
 }
 
 .glyphicon {
-    color: #fff;
-    font-size: 12px;
+	color: #fff;
+	font-size: 12px;
 
-    &.small {
-        font-size: 12px;
-    }
-    &.medium {
-        font-size: 14px;
-    }
-    &.large {
-        font-size: 18px;
-    }
-    &.colorGreen {
-        color: #35776d;
-    }
+	&.small {
+		font-size: 12px;
+	}
+	&.medium {
+		font-size: 14px;
+	}
+	&.large {
+		font-size: 18px;
+	}
+	&.colorGreen {
+		color: #35776d;
+	}
 }
